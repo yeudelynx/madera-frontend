@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="madera.Views.CreateUser">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Nom" />
+            <Entry x:Name="entry_nom" Placeholder="Nom" />
+
+            <Label Text="Prénom" />
+            <Entry x:Name="entry_prenom" Placeholder="Prénom" />
+
+            <Label Text="Téléphone" />
+            <Entry x:Name="entry_telephone" Placeholder="Téléphone" />
+
+            <Label Text="Mail" />
+            <Entry x:Name="entry_mail" Placeholder="Mail" />
+
+            <Label Text="Adresse" />
+            <Entry x:Name="entry_adresse" Placeholder="Adresse" />
+
+            <Button x:Name="btn_create_user" Text="Valider la création" Clicked="validate_user" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

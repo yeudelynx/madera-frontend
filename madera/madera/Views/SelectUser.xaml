@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="madera.Views.SelectUser">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="btn_user_1" Text="Utilisateur 1" Clicked="select_user" />
+            <Button x:Name="btn_user_2" Text="Utilisateur 2" Clicked="select_user" />
+            <Button x:Name="btn_user_3" Text="Utilisateur 3" Clicked="select_user" />
+            <Button x:Name="btn_user_4" Text="Utilisateur 4" Clicked="select_user" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

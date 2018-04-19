@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="madera.Views.ChoicePlan">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="btn_choice_plan_1" Text="Choisir le plan 1" Clicked="choice_plan" />
+            <Button x:Name="btn_choice_plan_2" Text="Choisir le plan 2" Clicked="choice_plan" />
+            <Button x:Name="btn_choice_plan_3" Text="Choisir le plan 3" Clicked="choice_plan" />
+            <Button x:Name="btn_choice_plan_4" Text="Choisir le plan 4" Clicked="choice_plan" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

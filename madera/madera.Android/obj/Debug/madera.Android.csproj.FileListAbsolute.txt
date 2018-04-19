@@ -1,0 +1,11 @@
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Android.csprojResolveAssemblyReference.cache
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Android.csproj.CoreCompileInputs.cache
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.App.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.MainPage.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.LoginPage.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.GestUser.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.CreateUser.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.ChoicePlan.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.SelectUser.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.SelectDevis.xaml.g.cs
+C:\Users\Anthonin\Documents\GitHub\madera-frontend\madera\madera.Android\obj\Debug\madera.Droid.Views.ViewDevisPlan.xaml.g.cs

@@ -13,8 +13,8 @@ namespace madera
 		{
 			InitializeComponent();
 
-			MainPage = new madera.MainPage();
-		}
+            MainPage = new NavigationPage(new madera.Views.LoginPage());
+        }
 
 		protected override void OnStart ()
 		{

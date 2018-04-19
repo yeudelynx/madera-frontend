@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="madera.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Page de login Maderap"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Username" />
+            <Entry x:Name="Entry_Username" Placeholder="Username" />
+
+            <Label Text="Password" />
+            <Entry IsPassword="True" x:Name="Entry_Password" Placeholder="Password" />
+
+            <Button x:Name="Btn_Signin" Text="Sign In" Clicked="SignInProcedure" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

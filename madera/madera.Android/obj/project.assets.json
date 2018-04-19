@@ -1313,24 +1313,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matthieu\\.nuget\\packages\\": {},
+    "C:\\Users\\Anthonin\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Sauvegarde\\RILA\\COURS\\Projet Madera\\madera-frontend\\madera\\madera\\madera.Android\\madera.Android.csproj",
+      "projectUniqueName": "C:\\Users\\Anthonin\\Documents\\GitHub\\madera-frontend\\madera\\madera.Android\\madera.Android.csproj",
       "projectName": "madera.Android",
-      "projectPath": "E:\\Sauvegarde\\RILA\\COURS\\Projet Madera\\madera-frontend\\madera\\madera\\madera.Android\\madera.Android.csproj",
-      "packagesPath": "C:\\Users\\matthieu\\.nuget\\packages\\",
-      "outputPath": "E:\\Sauvegarde\\RILA\\COURS\\Projet Madera\\madera-frontend\\madera\\madera\\madera.Android\\obj\\",
+      "projectPath": "C:\\Users\\Anthonin\\Documents\\GitHub\\madera-frontend\\madera\\madera.Android\\madera.Android.csproj",
+      "packagesPath": "C:\\Users\\Anthonin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Anthonin\\Documents\\GitHub\\madera-frontend\\madera\\madera.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\matthieu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Anthonin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
