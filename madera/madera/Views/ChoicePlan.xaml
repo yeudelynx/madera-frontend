@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="madera.Views.ChoicePlan">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="btn_sols">
             <Button x:Name="btn_choice_plan_1" Text="Choisir le plan 1" Clicked="choice_plan" />
             <Button x:Name="btn_choice_plan_2" Text="Choisir le plan 2" Clicked="choice_plan" />
             <Button x:Name="btn_choice_plan_3" Text="Choisir le plan 3" Clicked="choice_plan" />
