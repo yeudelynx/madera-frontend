@@ -27,7 +27,7 @@ namespace madera.Helpers
 
 
 
-            request = new Request(clients, devis, constituers , date);
+            //request = new Request(clients, devis, constituers , date);
         }
         public String GetJsonRequest() {
             return JsonConvert.SerializeObject(request, Formatting.Indented);

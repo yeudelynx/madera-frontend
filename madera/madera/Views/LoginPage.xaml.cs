@@ -43,8 +43,8 @@ namespace madera.Views
 
             LocalDatabase db = new LocalDatabase();
 
-            User user = db.tableUser.Where(u => u.login == "login" && u.password == "password").FirstOrDefault();
-            if(user != null){
+            User user = db.tableUser.Where(u => u.login.Equals(Entry_Username.Text) && u.password.Equals(Entry_Password.Text)).FirstOrDefault();
+            if(user == null){
                 var page_gest_user = new GestUser();
                 Navigation.PushAsync(page_gest_user);
                 NavigationPage.SetHasNavigationBar(page_gest_user, false);
