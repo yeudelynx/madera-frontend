@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{DADA0CE7-ED6B-4CF8-B782-5FF096D53811}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>madera</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Request.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\RequestSync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResponseSync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SyncDatas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Constituer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Categorie.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Couleur.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Devis.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Gamme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Date.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Matiere.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Magasin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Module.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Remise.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sol.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Unite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+  </ItemGroup>
+</Project>
