@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using madera.Models;
 
-
 namespace madera.Helpers
 {
     public class Request {

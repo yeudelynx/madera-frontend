@@ -10,6 +10,7 @@ namespace madera.Helpers
     public class LocalDatabase
     {
         public SQLiteConnection db { get; set; }
+        public String dbName { get; set; }
         public TableQuery<Categorie> tableCategorie { get; set; }
         public TableQuery<Client> tableClient { get; set; }
         public TableQuery<Constituer> tableConstituer { get; set; }
@@ -29,6 +30,8 @@ namespace madera.Helpers
         {
             try
             {
+                this.dbName = dbName;
+
                 string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dbName);
                 if (!File.Exists(dbPath))
                 {
@@ -78,6 +81,21 @@ namespace madera.Helpers
         public Boolean WriteSync(ResponseSync responseSync){
             try
             {
+                db.DeleteAll<Categorie>();
+                db.DeleteAll<Client>();
+                db.DeleteAll<Constituer>();
+                db.DeleteAll<Couleur>();
+                db.DeleteAll<Date>();
+                db.DeleteAll<Devis>();
+                db.DeleteAll<Gamme>();
+                db.DeleteAll<Magasin>();
+                db.DeleteAll<Matiere>();
+                db.DeleteAll<Module>();
+                db.DeleteAll<Remise>();
+                db.DeleteAll<Sol>();
+                db.DeleteAll<Unite>();
+                db.DeleteAll<User>();
+
                 db.Insert(responseSync.date);
                 foreach (var categorie in responseSync.categories)
                 {
@@ -131,6 +149,7 @@ namespace madera.Helpers
                 {
                     db.Insert(user);
                 }
+
                 return true;
             }catch (Exception ex){
                 Console.WriteLine("WriteSync error : " + ex);

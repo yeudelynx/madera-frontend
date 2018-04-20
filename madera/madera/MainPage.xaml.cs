@@ -27,34 +27,6 @@ namespace madera
 
             //Hide sync loading
 
-            ProcessSync();
-        }
-
-        async void ProcessSync()
-        {
-            try
-            {
-                SyncDatas syncDatas = new SyncDatas();
-                ResponseSync responseSync = await syncDatas.Process();
-
-                //Save datas in DB.
-                LocalDatabase db = new LocalDatabase();
-                db.WriteSync(responseSync);
-                Console.WriteLine(db.tableDate.Where(s => s.id.Equals(1)));
-
-                foreach(var user in db.tableUser){
-                    Console.WriteLine(" ++++++ USER LOGIN" + user.id +" : " + user.login);
-                }
-            }
-            catch (Exception ex){
-                //Show popup warning here !!!!!
-                // + "RollBack" ?!
-
-                //Toast.MakeText(this, ex.StackTrace, ToastLength.Long).Show();
-                Console.WriteLine("error : " + ex);
-            }
-
-
         }
     }
 }

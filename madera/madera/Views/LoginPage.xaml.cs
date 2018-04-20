@@ -34,8 +34,20 @@ namespace madera.Views
             //If Refresher response == FALSE, show sync KO...
 
             //Hide sync loading
+            try
+            {
+                //SyncDatas syncDatas = new SyncDatas();
+                //syncDatas.Process();
+                SyncDatas.Process();
+            }
+            catch (Exception ex)
+            {
+                //Show popup warning here !!!!!
+                // + "RollBack" ?!
 
-            ProcessSync();
+                //Toast.MakeText(this, ex.StackTrace, ToastLength.Long).Show();
+                Console.WriteLine("error : " + ex);
+            }
         }
 
         public void SignInProcedure(object sender, EventArgs e)
@@ -55,37 +67,6 @@ namespace madera.Views
                 Navigation.PushAsync(page_login_page);
                 NavigationPage.SetHasNavigationBar(page_login_page, false);
             }
-
-        }
-
-        async void ProcessSync()
-        {
-            try
-            {
-                SyncDatas syncDatas = new SyncDatas();
-                ResponseSync responseSync = await syncDatas.Process();
-
-                //Save datas in DB.
-                LocalDatabase db = new LocalDatabase();
-                db.WriteSync(responseSync);
-                Console.WriteLine(db.tableDate.Where(s => s.id.Equals(1)));
-
-                foreach (var user in db.tableUser)
-                {
-                    Console.WriteLine(" ++++++ USER LOGIN" + user.id + " : " + user.login);
-                }
-
-        
-            }
-            catch (Exception ex)
-            {
-                //Show popup warning here !!!!!
-                // + "RollBack" ?!
-
-                //Toast.MakeText(this, ex.StackTrace, ToastLength.Long).Show();
-                Console.WriteLine("error : " + ex);
-            }
-
 
         }
     }
