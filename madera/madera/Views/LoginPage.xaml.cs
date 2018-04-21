@@ -36,9 +36,8 @@ namespace madera.Views
             //Hide sync loading
             try
             {
-                //SyncDatas syncDatas = new SyncDatas();
-                //syncDatas.Process();
-                SyncDatas.Process();
+                SyncDatas syncDatas = new SyncDatas();
+                syncDatas.Process();
             }
             catch (Exception ex)
             {

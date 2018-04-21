@@ -9,28 +9,29 @@ using System.Threading;
 
 namespace madera.Helpers
 {
-    public static class SyncDatas
+    public class SyncDatas
     {
-        public static async void  Process()
+        //TODO : add observable on syncOK
+        bool syncOK = false;
+
+        public async void Process()
         {
             RequestSync requestSync = new RequestSync();
             String requestJson = requestSync.GetJsonRequest();
-            //String requestJson ="";
+            //String requestJson = "";
             HttpContent content = new StringContent(requestJson, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
             var response = await client.PostAsync("http://buyyourcity.ovh/api/sync", content);
             string responseJson = await response.Content.ReadAsStringAsync();
             ResponseSync responseSync = JsonConvert.DeserializeObject<ResponseSync>(responseJson);
-
+           
             //Save datas in DB.
             LocalDatabase db = new LocalDatabase();
-            db.WriteSync(responseSync);
-            Console.WriteLine(db.tableDate.Where(s => s.id.Equals(1)));
-
+            syncOK = db.WriteSync(responseSync);
             Thread.Sleep(1000);
-            Console.WriteLine(requestJson);
-
-
+            Console.WriteLine("TRACE requestJson : " + requestJson);
+            Console.WriteLine("TRACE responseJson : " + responseJson);
+            Console.WriteLine("TRACE syncOK : " + syncOK);
         }
     }
 }
