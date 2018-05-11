@@ -30,13 +30,14 @@ namespace madera.Views
 
                 string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "madera.db3");
                 var db = new SQLiteConnection(dbPath);
-
+                String datetimestr = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 Client client = new Client {
-                    nom = entry_nom.Text,
-                    prenom = entry_prenom.Text,
-                    mail = entry_mail.Text,
-                    tel = entry_telephone.Text,
-                    adresse = entry_adresse.Text
+                    nom = (String)entry_nom.Text,
+                    prenom = (String)entry_prenom.Text,
+                    mail = (String)entry_mail.Text,
+                    tel = (String)entry_telephone.Text,
+                    adresse = (String)entry_adresse.Text,
+                    updated_at = datetimestr
                 };
 
                 db.Insert(client);
