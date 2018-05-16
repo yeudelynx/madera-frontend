@@ -48,25 +48,26 @@ namespace madera.Views
                 Console.WriteLine("error : " + ex);
             }
         }
-
+        
         public void SignInProcedure(object sender, EventArgs e)
         {
-
+            /*
             LocalDatabase db = new LocalDatabase();
 
             User user = db.tableUser.Where(u => u.login.Equals(Entry_Username.Text) && u.password.Equals(Entry_Password.Text)).FirstOrDefault();
-            //if(user != null){
+            if(user != null){
                 var page_gest_user = new GestUser();
                 Navigation.PushAsync(page_gest_user);
                 NavigationPage.SetHasNavigationBar(page_gest_user, false);
-            /*}
+            }
             else
             {
                 var page_login_page = new LoginPage();
                 Navigation.PushAsync(page_login_page);
                 NavigationPage.SetHasNavigationBar(page_login_page, false);
-            }*/
-
+            }
+            */
         }
+        
     }
 }

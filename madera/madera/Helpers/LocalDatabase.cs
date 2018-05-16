@@ -4,6 +4,7 @@ using System.Text;
 using SQLite;
 using madera.Models;
 using System.IO;
+using System.Globalization;
 
 namespace madera.Helpers
 {
@@ -51,6 +52,10 @@ namespace madera.Helpers
                     db.CreateTable<Sol>();
                     db.CreateTable<Unite>();
                     db.CreateTable<User>();
+
+                    Date date = new Date();
+                    date.date = DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture);
+                    db.Insert(date);
                 }
                 else
                 {
@@ -71,6 +76,7 @@ namespace madera.Helpers
                 tableSol = db.Table<Sol>();
                 tableUnite = db.Table<Unite>();
                 tableUser = db.Table<User>();
+
             }
             catch (Exception ex)
             {
@@ -85,7 +91,6 @@ namespace madera.Helpers
                 db.DeleteAll<Client>();
                 db.DeleteAll<Constituer>();
                 db.DeleteAll<Couleur>();
-                db.DeleteAll<Date>();
                 db.DeleteAll<Devis>();
                 db.DeleteAll<Gamme>();
                 db.DeleteAll<Magasin>();

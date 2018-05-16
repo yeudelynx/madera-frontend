@@ -14,19 +14,29 @@ namespace madera.Helpers
 
         public RequestSync()
         {
-            //Get Database instance
-            LocalDatabase db = new LocalDatabase();
-            //Get LastSyncDate
-            Date date = db.tableDate.OrderByDescending(v => v.id).FirstOrDefault();
-            // Truncate to whole second
-            String datetimestr = DateTime.ParseExact(date.date, "yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+            try
+            {
+                 
+                //Get Database instance
+                LocalDatabase db = new LocalDatabase();
 
-            //Get all news or updated clients, devis & constituers, after LastSyncDate
-            List<Client> clients = db.tableClient.ToList().Where(c => DateTime.Parse(c.updated_at) > DateTime.Parse(datetimestr)).ToList<Client>();
-            List<Devis> devis = db.tableDevis.ToList().Where(d => DateTime.Parse(d.updated_at) > DateTime.Parse(datetimestr)).ToList<Devis>();
-            List<Constituer> constituers = db.tableConstituer.ToList().Where(c => DateTime.Parse(c.updated_at) > DateTime.Parse(datetimestr)).ToList<Constituer>();
+                //Get LastSyncDate
+                Date date = db.tableDate.OrderByDescending(v => v.id).Last();
+                // Truncate to whole second
+                String datetimestr = DateTime.ParseExact(date.date, "yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
 
-            this.request = new Request(clients, devis, constituers, date);
+                //Get all news or updated clients, devis & constituers, after LastSyncDate
+                List<Client> clients = db.tableClient.ToList().Where(c => DateTime.Parse(c.updated_at) > DateTime.Parse(datetimestr)).ToList<Client>();
+                List<Devis> devis = db.tableDevis.ToList().Where(d => DateTime.Parse(d.updated_at) > DateTime.Parse(datetimestr)).ToList<Devis>();
+                List<Constituer> constituers = db.tableConstituer.ToList().Where(c => DateTime.Parse(c.updated_at) > DateTime.Parse(datetimestr)).ToList<Constituer>();
+
+                this.request = new Request(clients, devis, constituers, date);
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Request sync error : " + ex);
+            }
         }
         public String GetJsonRequest()
         {

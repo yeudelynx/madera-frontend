@@ -24,7 +24,7 @@ namespace madera.Helpers
             var response = await client.PostAsync("http://buyyourcity.ovh/api/sync", content);
             string responseJson = await response.Content.ReadAsStringAsync();
             ResponseSync responseSync = JsonConvert.DeserializeObject<ResponseSync>(responseJson);
-           
+
             //Save datas in DB.
             LocalDatabase db = new LocalDatabase();
             syncOK = db.WriteSync(responseSync);
