@@ -1,20 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="madera.Views.LoginPage">
+             x:Class="madera.Views.LoginPage"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Page de login Maderap"
+        <StackLayout Orientation="Vertical" Padding="50" Spacing="20">
+            <Image HorizontalOptions="Center" WidthRequest="300" Source="logo.jpg"/>
+            <Label Text="Veuillez vous connecter"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-
-            <Label Text="Username" />
-            <Entry x:Name="Entry_Username" Placeholder="Username" />
-
-            <Label Text="Password" />
-            <Entry IsPassword="True" x:Name="Entry_Password" Placeholder="Password" />
-
-            <Button x:Name="Btn_Signin" Text="Sign In" Clicked="SignInProcedure" />
+                HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24"/>
+            <Frame BackgroundColor="#BF043055" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry x:Name="Entry_Username" Placeholder="Login"   
+                           PlaceholderColor="White" HeightRequest="50" WidthRequest="50"
+                           Keyboard="Email"  
+                           TextColor="White"/>
+                    <Entry x:Name="Entry_Password" Placeholder="Password"   
+                           PlaceholderColor="White" HeightRequest="50"   
+                           IsPassword="True"  
+                           TextColor="White"/>
+                </StackLayout>
+            </Frame>
+            <Button x:Name="Btn_Signin" Text="Connexion" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#BF043055" Clicked="SignInProcedure" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

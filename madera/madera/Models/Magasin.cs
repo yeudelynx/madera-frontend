@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Magasin
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string adresse { get; set; }
         public string lib_magasin { get; set; }

@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Sol
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string image_sol { get; set; }
         public string longueur { get; set; }

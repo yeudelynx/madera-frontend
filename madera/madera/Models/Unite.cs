@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Unite
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string symbole { get; set; }
         public string lib_unite{ get; set; }

@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Remise
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public double valeur_remise { get; set; }
         public string lib_remise{ get; set; }

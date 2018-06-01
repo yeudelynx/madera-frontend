@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Constituer
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public double x_pos { get; set; }
         public double y_pos { get; set; }

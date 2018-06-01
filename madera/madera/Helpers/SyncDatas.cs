@@ -17,8 +17,8 @@ namespace madera.Helpers
         public async void Process()
         {
             RequestSync requestSync = new RequestSync();
-            String requestJson = requestSync.GetJsonRequest();
-            //String requestJson = "";
+            //String requestJson = requestSync.GetJsonRequest();
+            String requestJson = "";
             HttpContent content = new StringContent(requestJson, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
             var response = await client.PostAsync("http://buyyourcity.ovh/api/sync", content);

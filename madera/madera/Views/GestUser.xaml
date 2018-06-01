@@ -1,11 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="madera.Views.GestUser">
+             x:Class="madera.Views.GestUser"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Button x:Name="btn_create_user" Text="Créer un utilisateur" Clicked="create_user" />
-            <Button x:Name="btn_choice_user" Text="Choisir un utilisateur" Clicked="choice_user" />
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <BoxView HeightRequest="10"/>
+            <Image HorizontalOptions="Center" WidthRequest="300" Source="logo.jpg"/>
+            <Label Text="Gestion de l'utilisateur"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24" />
+            <Button x:Name="btn_create_user" Text="Créer un utilisateur" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#BF043055" Clicked="create_user" />
+            <Button x:Name="btn_choice_user" Text="Choisir un utilisateur" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#BF043055" Clicked="choice_user" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

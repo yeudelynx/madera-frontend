@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Matiere
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string lib_matiere { get; set; }
         public String created_at { get; set; }

@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Devis
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public bool is_sync { get; set; }
         public int orientation { get; set; }

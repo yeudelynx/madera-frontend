@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Client
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }

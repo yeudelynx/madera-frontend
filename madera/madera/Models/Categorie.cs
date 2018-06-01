@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Categorie
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public String lib_categorie { get; set; }
         public String created_at { get; set; }

@@ -7,7 +7,7 @@ namespace madera.Models
 {
     public class Couleur
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
         public string lib_couleur { get; set; }
         public string code_couleur { get; set; }

@@ -19,17 +19,23 @@ namespace madera.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CreateUser : ContentPage
 	{
-		public CreateUser ()
+        public int iduser;
+        public CreateUser ()
 		{
 			InitializeComponent ();
 		}
+        public CreateUser(int iduser)
+        {
+            this.iduser = iduser;
+        }
 
         public void validate_user(object sender, EventArgs e)
         {
+            //inscription client
             if (entry_nom.Text != "" && entry_prenom.Text != "" && entry_mail.Text != "" && entry_telephone.Text != "" && entry_adresse.Text != "") {
 
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "madera.db3");
-                var db = new SQLiteConnection(dbPath);
+                LocalDatabase db = new LocalDatabase();
+
                 String datetimestr = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 Client client = new Client {
                     nom = (String)entry_nom.Text,
@@ -40,14 +46,28 @@ namespace madera.Views
                     updated_at = datetimestr
                 };
 
-                db.Insert(client);
+                db.db.Insert(client);
 
-                var page_choice_plan = new ChoicePlan();
-                Navigation.PushAsync(page_choice_plan);
-                NavigationPage.SetHasNavigationBar(page_choice_plan, false);
+                int idclient = 0;
+                var tableClient = db.tableClient.ToList();
+                foreach (var clients in tableClient)
+                {
+                    if (clients.nom == entry_nom.Text && clients.prenom == entry_prenom.Text)
+                    {
+                        idclient = clients.id;
+                    }
+                }
+
+                if (idclient != 0)
+                {
+                    var page_choice_plan = new ChoicePlan() { iduser = iduser, idclient = idclient };
+                    Navigation.PushAsync(page_choice_plan);
+                    NavigationPage.SetHasNavigationBar(page_choice_plan, false);
+                }
 
             }
 
         }
+        
     }
 }

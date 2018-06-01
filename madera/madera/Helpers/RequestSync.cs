@@ -23,8 +23,9 @@ namespace madera.Helpers
                 //Get LastSyncDate
                 Date date = db.tableDate.OrderByDescending(v => v.id).Last();
                 // Truncate to whole second
+                Console.WriteLine("madate" +date.date);
                 String datetimestr = DateTime.ParseExact(date.date, "yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
-
+                Console.WriteLine("madate1"+ datetimestr);
                 //Get all news or updated clients, devis & constituers, after LastSyncDate
                 List<Client> clients = db.tableClient.ToList().Where(c => DateTime.Parse(c.updated_at) > DateTime.Parse(datetimestr)).ToList<Client>();
                 List<Devis> devis = db.tableDevis.ToList().Where(d => DateTime.Parse(d.updated_at) > DateTime.Parse(datetimestr)).ToList<Devis>();

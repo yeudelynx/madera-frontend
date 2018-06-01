@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="madera.Views.SelectDevis">
+             x:Class="madera.Views.SelectDevis"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Label Text="Choix d'un devis"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-
-            <Button x:Name="btn_devis_1" Text="Devis 1" Clicked="select_devis" />
-            <Button x:Name="btn_devis_2" Text="Devis 2" Clicked="select_devis" />
-            <Button x:Name="btn_devis_3" Text="Devis 3" Clicked="select_devis" />
-            <Button x:Name="btn_devis_4" Text="Devis 4" Clicked="select_devis" />
+                HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24" />
+            <Frame BackgroundColor="#BF043055" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10" x:Name="btn_devis">
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

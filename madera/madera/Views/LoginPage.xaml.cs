@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using Android.Widget;
 using madera.Helpers;
 using madera.Models;
-using Newtonsoft.Json;
-
-
+using System.Linq;
 
 namespace madera.Views
 {
@@ -23,17 +14,6 @@ namespace madera.Views
 		{
 			InitializeComponent ();
 
-            //Call task Refresher 
-
-            //Show sync loading
-
-            //Wait Refresher response
-
-            //If Refresher response == TRUE, show sync OK
-
-            //If Refresher response == FALSE, show sync KO...
-
-            //Hide sync loading
             try
             {
                 SyncDatas syncDatas = new SyncDatas();
@@ -41,22 +21,30 @@ namespace madera.Views
             }
             catch (Exception ex)
             {
-                //Show popup warning here !!!!!
-                // + "RollBack" ?!
-
-                //Toast.MakeText(this, ex.StackTrace, ToastLength.Long).Show();
                 Console.WriteLine("error : " + ex);
             }
+
         }
         
         public void SignInProcedure(object sender, EventArgs e)
         {
-            /*
+            
             LocalDatabase db = new LocalDatabase();
 
-            User user = db.tableUser.Where(u => u.login.Equals(Entry_Username.Text) && u.password.Equals(Entry_Password.Text)).FirstOrDefault();
-            if(user != null){
-                var page_gest_user = new GestUser();
+            int iduser = 0;
+            var tableUser = db.tableUser.ToList();
+            
+            foreach(var user in tableUser)
+            {
+                if (user.login.ToString() == Entry_Username.Text && user.password.ToString() == Entry_Password.Text)
+                {
+                    iduser = user.id;
+                }
+            }
+
+            if (iduser != 0)
+            {
+                var page_gest_user = new GestUser() {iduser = iduser};
                 Navigation.PushAsync(page_gest_user);
                 NavigationPage.SetHasNavigationBar(page_gest_user, false);
             }
@@ -66,7 +54,7 @@ namespace madera.Views
                 Navigation.PushAsync(page_login_page);
                 NavigationPage.SetHasNavigationBar(page_login_page, false);
             }
-            */
+            
         }
         
     }
