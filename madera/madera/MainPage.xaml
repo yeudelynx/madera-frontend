@@ -4,8 +4,6 @@
              xmlns:local="clr-namespace:madera"
              x:Class="madera.MainPage">
 
-	<Label Text="Welcome to Xamarin.Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+
 
 </ContentPage>
