@@ -141,8 +141,12 @@ namespace madera.Views
             }
         }
 
+        // Manipulation du plan (+ maj devis)
         void click(object sender, EventArgs e)
         {
+            var button = (Button)sender;
+            // servira à recupérer les coordonnées dans l'espace => x y z
+            // var classId = button.ClassId;
             string selectedValue = "";
             try
             {
@@ -152,22 +156,32 @@ namespace madera.Views
             {
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
-            var button = (Button)sender;
-
 
             if (selectedValue == "Aucune")
             {
                 button.BackgroundColor = Color.Default;
+                // j'enleve le machin du devis where 
+                //listeDevis.Children.Add(selectedValue);
+
             }
             if (selectedValue == "Marron")
             {
                 button.BackgroundColor = Color.Brown;
+                Xamarin.Forms.Label label_maron = new Label();
+                label_maron.Text = selectedValue;
+                label_maron.ClassId = "1";
+                listeDevis.Children.Add(label_maron);
+
             }
             if (selectedValue == "Vert")
             {
                 button.BackgroundColor = Color.Green;
+                Xamarin.Forms.Label label_green = new Label();
+                label_green.Text = selectedValue;
+                label_green.ClassId = "2";
+                listeDevis.Children.Add(label_green);
             }
-            
+
 
 
 

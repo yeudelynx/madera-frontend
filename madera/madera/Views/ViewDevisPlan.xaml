@@ -47,12 +47,8 @@
                 Faire un plan fait de boutons
                 On selectionne un module dans la liste
                 On clique sur un bouton pour appliquer le module au plan
-                
-                
-                
-                
-                
-                
+               
+                              
                 -->
                 
 
@@ -163,7 +159,9 @@
                     </Frame>
 
                     <BoxView BackgroundColor="AliceBlue" Grid.Row="1"/>
-                    <Label Text="Zone du plan" Grid.Row="1" />
+                    <StackLayout x:Name="listeDevis" Grid.Row="1">
+
+                    </StackLayout>
                 </Grid>
             </Grid>
         </ContentPage.Content>
