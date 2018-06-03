@@ -20,6 +20,9 @@ namespace madera.Views
 
         public string idBordelCLicke;
 
+        public class CustomButton : Button
+        {
+        }
         public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
         {
             this.idclient = idclient;
@@ -50,8 +53,6 @@ namespace madera.Views
                     //test.Text = "Module noir";
                     idBordelCLicke = "idBordelCLicke";
 
-
-
                 })
             });
 
@@ -73,36 +74,14 @@ namespace madera.Views
 
             btn_gamme.Children.Add(label_test2);
 
-
-            gammePicker.Items.Add("Item 1");
-            gammePicker.Items.Add("Item 2");
-
-
+            gammePicker.Items.Add("Aucune");
+            gammePicker.Items.Add("Marron");
+            gammePicker.Items.Add("Vert");
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
             // label de la gamme 
             foreach (var gamme in tableGamme)
             {
@@ -164,19 +143,34 @@ namespace madera.Views
 
         void click(object sender, EventArgs e)
         {
-
-            var selectedValue = gammePicker.Items[gammePicker.SelectedIndex];
+            string selectedValue = "";
+            try
+            {
+                selectedValue = gammePicker.Items[gammePicker.SelectedIndex];
+            }
+            catch (Exception)
+            {
+                //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
+            }
             var button = (Button)sender;
-            button.Text = selectedValue;
 
 
-                /*var classId = button.ClassId;
-            Console.WriteLine(classId);*/
+            if (selectedValue == "Aucune")
+            {
+                button.BackgroundColor = Color.Default;
+            }
+            if (selectedValue == "Marron")
+            {
+                button.BackgroundColor = Color.Brown;
+            }
+            if (selectedValue == "Vert")
+            {
+                button.BackgroundColor = Color.Green;
+            }
+            
 
 
 
-
-            //test.Text = Value de ma combo box
         }
 
         public void view_devis_plan(object sender, EventArgs e)
@@ -194,7 +188,5 @@ namespace madera.Views
 
     }
 
-    internal class Gamme
-    {
-    }
+
 }

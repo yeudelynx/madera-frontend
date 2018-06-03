@@ -38,8 +38,8 @@
                 <BoxView BackgroundColor="AliceBlue" Grid.Column="1" />
                 <Label Text="Zone du plan"  Grid.Column="1" HeightRequest="50" />
 
-                <Button x:Name="lebouton1" ClassId="lebouton1" Text="Sauvegarder" Clicked="click" Grid.Column="0" Grid.Row="3" />
-                <Button x:Name="lebouton2" ClassId="lebouton2" Text="Sauvegarder" Clicked="click" Grid.Column="0" Grid.Row="4" />
+                <Button Clicked="click" Grid.Column="0" Grid.Row="3" />
+                <Button Clicked="click" Grid.Column="0" Grid.Row="4" />
 
 
                 <!-- 
