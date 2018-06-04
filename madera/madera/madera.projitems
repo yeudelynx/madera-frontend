@@ -42,12 +42,12 @@
       <DependentUpon>ChoicePlan.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\CreateUser.xaml.cs">
-      <DependentUpon>CreateUser.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CreateClient.xaml.cs">
+      <DependentUpon>CreateClient.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\GestUser.xaml.cs">
-      <DependentUpon>GestUser.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\GestClient.xaml.cs">
+      <DependentUpon>GestClient.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs">
@@ -58,8 +58,8 @@
       <DependentUpon>SelectDevis.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\SelectUser.xaml.cs">
-      <DependentUpon>SelectUser.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SelectClient.xaml.cs">
+      <DependentUpon>SelectClient.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ViewDevisPlan.xaml.cs">
@@ -74,13 +74,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\GestUser.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\GestClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CreateUser.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CreateClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -92,7 +92,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SelectUser.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SelectClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

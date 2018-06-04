@@ -5,7 +5,7 @@
              BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="50" Spacing="20">
-            <Image HorizontalOptions="Center" WidthRequest="300" Source="logo.jpg"/>
+            <Image HorizontalOptions="Center" WidthRequest="300" Source="logo.png"/>
             <Label Text="Veuillez vous connecter"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24"/>

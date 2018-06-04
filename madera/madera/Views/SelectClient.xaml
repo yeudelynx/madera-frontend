@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="madera.Views.SelectUser"
+             x:Class="madera.Views.SelectClient"
              BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
@@ -9,7 +9,7 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24" />
             <Frame BackgroundColor="#BF043055" HasShadow="False">
-                <StackLayout Orientation="Vertical" Spacing="10" x:Name="btn_users">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="10" x:Name="btn_clients">
                 </StackLayout>
             </Frame>
         </StackLayout>

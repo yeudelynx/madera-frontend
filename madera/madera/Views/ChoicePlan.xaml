@@ -9,7 +9,7 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="24" />
             <Frame BackgroundColor="#BF043055" HasShadow="False">
-                <StackLayout Orientation="Vertical" Spacing="10" x:Name="btn_sols">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="10" x:Name="btn_sols">
                 </StackLayout>
             </Frame>
         </StackLayout>

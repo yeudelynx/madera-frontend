@@ -30,18 +30,22 @@ namespace madera.Views
 
             foreach (var devis in db.tableDevis)
             {
-                Xamarin.Forms.Button MyControl1 = new Xamarin.Forms.Button();
-                MyControl1.Text = "Devis" + devis.id;
-               /* MyControl1.TextColor = "White";
-                MyControl1.FontAttributes = "Bold";
-                MyControl1.FontSize = "Large";
-                MyControl1.HorizontalOptions = "FillAndExpand";
-                MyControl1.BackgroundColor = "#BF043055";*/
-                MyControl1.Clicked += (object sender, EventArgs e) => {
-                    select_devis(sender, e, devis.id);
-                };
+                if (devis.user_id == iduser)
+                {
+                    Xamarin.Forms.Button MyControl1 = new Xamarin.Forms.Button();
+                    MyControl1.Text = "Devis" + " " + devis.id;
+                    /* MyControl1.TextColor = "White";
+                     MyControl1.FontAttributes = "Bold";
+                     MyControl1.FontSize = "Large";
+                     MyControl1.HorizontalOptions = "FillAndExpand";
+                     MyControl1.BackgroundColor = "#BF043055";*/
+                    MyControl1.Clicked += (object sender, EventArgs e) =>
+                    {
+                        select_devis(sender, e, devis.id);
+                    };
 
-                btn_devis.Children.Add(MyControl1);
+                    btn_devis.Children.Add(MyControl1);
+                }
             }
         }
 

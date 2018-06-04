@@ -110,17 +110,17 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\logo.jpg">
+    <AndroidResource Include="Resources\drawable-xxhdpi\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\logo.jpg">
+    <AndroidResource Include="Resources\drawable-xhdpi\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\logo.jpg">
+    <AndroidResource Include="Resources\drawable-hdpi\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
   </ItemGroup>

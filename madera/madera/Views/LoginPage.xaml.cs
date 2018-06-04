@@ -44,9 +44,9 @@ namespace madera.Views
 
             if (iduser != 0)
             {
-                var page_gest_user = new GestUser() {iduser = iduser};
-                Navigation.PushAsync(page_gest_user);
-                NavigationPage.SetHasNavigationBar(page_gest_user, false);
+                var page_gest_client = new GestClient() {iduser = iduser};
+                Navigation.PushAsync(page_gest_client);
+                NavigationPage.SetHasNavigationBar(page_gest_client, false);
             }
             else
             {

@@ -17,19 +17,19 @@ using Xamarin.Forms.Xaml;
 namespace madera.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CreateUser : ContentPage
+	public partial class CreateClient : ContentPage
 	{
         public int iduser;
-        public CreateUser ()
+        public CreateClient()
 		{
 			InitializeComponent ();
 		}
-        public CreateUser(int iduser)
+        public CreateClient(int iduser)
         {
             this.iduser = iduser;
         }
 
-        public void validate_user(object sender, EventArgs e)
+        public void validate_client(object sender, EventArgs e)
         {
             //inscription client
             if (entry_nom.Text != "" && entry_prenom.Text != "" && entry_mail.Text != "" && entry_telephone.Text != "" && entry_adresse.Text != "") {
@@ -48,7 +48,7 @@ namespace madera.Views
 
                 db.db.Insert(client);
 
-                int idclient = 0;
+                int idclient = -1;
                 var tableClient = db.tableClient.ToList();
                 foreach (var clients in tableClient)
                 {
@@ -58,7 +58,7 @@ namespace madera.Views
                     }
                 }
 
-                if (idclient != 0)
+                if (idclient != -1)
                 {
                     var page_choice_plan = new ChoicePlan() { iduser = iduser, idclient = idclient };
                     Navigation.PushAsync(page_choice_plan);
