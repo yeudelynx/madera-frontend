@@ -1,4 +1,6 @@
 ﻿using System;
+using madera.Helpers;
+using madera.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +20,19 @@ namespace madera
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
 
-		protected override void OnSleep ()
+            try
+            {
+                SyncDatas syncDatas = new SyncDatas();
+                syncDatas.Process();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error : " + ex);
+            }
+        }
+
+        protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
 		}

@@ -14,16 +14,6 @@ namespace madera.Views
 		{
 			InitializeComponent ();
 
-            try
-            {
-                SyncDatas syncDatas = new SyncDatas();
-                syncDatas.Process();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("error : " + ex);
-            }
-
         }
         
         public void SignInProcedure(object sender, EventArgs e)
