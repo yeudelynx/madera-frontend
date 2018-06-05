@@ -12,7 +12,9 @@ namespace madera.Helpers
     public class SyncDatas
     {
         //TODO : add observable on syncOK
-        bool syncOK = false;
+        bool syncOK = true;
+
+
 
         public async void Process()
         {

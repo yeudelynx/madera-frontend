@@ -34,15 +34,15 @@ namespace madera.Views
 
             if (iduser != 0)
             {
-                var page_gest_user = new GestUser() {iduser = iduser};
-                Navigation.PushAsync(page_gest_user);
-                NavigationPage.SetHasNavigationBar(page_gest_user, false);
+                var ViewDevisplan = new ViewDevisPlan() {iduser = iduser};
+                Navigation.PushAsync(ViewDevisplan);
+                NavigationPage.SetHasNavigationBar(ViewDevisplan, false);
             }
             else
             {
-                var page_login_page = new LoginPage();
-                Navigation.PushAsync(page_login_page);
-                NavigationPage.SetHasNavigationBar(page_login_page, false);
+                var ViewDevisplan = new ViewDevisPlan();
+                Navigation.PushAsync(ViewDevisplan);
+                NavigationPage.SetHasNavigationBar(ViewDevisplan, false);
             }
             
         }
