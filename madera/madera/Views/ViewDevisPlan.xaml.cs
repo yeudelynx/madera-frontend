@@ -20,9 +20,6 @@ namespace madera.Views
 
         public string idBordelCLicke;
 
-        public class CustomButton : Button
-        {
-        }
         public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
         {
             this.idclient = idclient;
@@ -31,35 +28,42 @@ namespace madera.Views
             this.iduser = iduser;
 
         }
+
+
+
         public ViewDevisPlan()
         {
             InitializeComponent();
 
             LocalDatabase db = new LocalDatabase();
-            var tableGamme = db.tableGamme.ToList();
-            var tableCategorie = db.tableCategorie.ToList();
-            var tableModule = db.tableModule.ToList();
+            var listeGamme = db.tableGamme.ToList();
+            var listeCategorie = db.tableCategorie.ToList();
+            var listeModule = db.tableModule.ToList();
+            
+            //picker Gamme
+            var pickerGamme = new Picker { Title = "Gamme" };
+            pickerGamme.ItemDisplayBinding = new Binding("lib_gamme");
+            pickerGamme.ItemsSource = listeGamme;
+            panneauSelection.Children.Add(pickerGamme);
+
+
+            //picker Categorie
+            var pickerCategorie = new Picker { Title = "Catégorie" };
+            pickerCategorie.ItemDisplayBinding = new Binding("lib_categorie");
+            pickerCategorie.ItemsSource = listeCategorie;
+            panneauSelection.Children.Add(pickerCategorie);
+
+            //picker Module
+            var pickerModule = new Picker { Title = "Module" };
+            pickerModule.ItemDisplayBinding = new Binding("lib_module");
+            pickerModule.ItemsSource = listeModule;
+            panneauSelection.Children.Add(pickerModule);
+
+
+
 
             // à supprimer quand j'aurai des données 
-            Xamarin.Forms.Label label_test = new Label();
-            label_test.Text = "Module noir";
-            label_test.GestureRecognizers.Add(new TapGestureRecognizer()
-            {
-                // 1 => afficher les valeurs du bazar selectionné dans les specs en bas
-
-                Command = new Command(() =>
-                {
-                    // liste d'actions du onclick
-                    //test.Text = "Module noir";
-                    idBordelCLicke = "idBordelCLicke";
-
-                })
-            });
-
-            btn_gamme.Children.Add(label_test);
-
-            // à supprimer quand j'aurai des données 
-            Xamarin.Forms.Label label_test2 = new Label();
+            /*Xamarin.Forms.Label label_test2 = new Label();
             label_test2.Text = "Module blanc";
             label_test2.GestureRecognizers.Add(new TapGestureRecognizer()
             {
@@ -72,36 +76,31 @@ namespace madera.Views
                 })
             });
 
-            btn_gamme.Children.Add(label_test2);
-
-            gammePicker.Items.Add("Aucune");
-            gammePicker.Items.Add("Marron");
-            gammePicker.Items.Add("Vert");
+            btn_gamme.Children.Add(label_test2);*/
 
 
-
-
-            
             // label de la gamme 
-            foreach (var gamme in tableGamme)
+            foreach (var gamme in listeGamme)
             {
                 Xamarin.Forms.Label label_gamme = new Label();
                 label_gamme.Text = gamme.lib_gamme;
-                btn_gamme.Children.Add(label_gamme);
+                panneauSelection.Children.Add(label_gamme);
 
                 // label des catégories
-                foreach (var categorie in tableCategorie)
+
+                
+                foreach (var categorie in listeGamme)
                 {
                     Xamarin.Forms.Label label_categorie = new Label();
-                    label_categorie.Text = categorie.lib_categorie;
+                    label_categorie.Text = categorie.lib_gamme;
                     Thickness marge_categorie = label_categorie.Margin;
                     marge_categorie.Left = 20;
                     label_categorie.Margin = marge_categorie;
-                    btn_gamme.Children.Add(label_categorie);
+                    panneauSelection.Children.Add(label_categorie);
                     Console.WriteLine(label_gamme.Text);
                     
                     // label des modules 
-                    foreach (var module in tableModule)
+                    foreach (var module in listeGamme)
                     {
                         Xamarin.Forms.Label label_module = new Label();
                         // => bug sur l'ID (balance un nombre random qui s'incrémente à chaque compilation)
@@ -119,13 +118,11 @@ namespace madera.Views
                             // 2 => le positionner sur le plan
                             Command = new Command(() =>
                             {
-                                DisplayAlert("Task", "Clicked " + module.longueur, "ok");
                             })
                             //Command = new Command(() => Console.WriteLine(module.id)),
                         });
-                        btn_gamme.Children.Add(label_module);
+                        panneauSelection.Children.Add(label_module);
                     }
-
 
                 }
 
@@ -133,15 +130,14 @@ namespace madera.Views
                 saut_ligne.Text = "\n";
 
                 //btn_gamme.Children.Add(Mur);
-                btn_gamme.Children.Add(saut_ligne);
-
-
-
+                panneauSelection.Children.Add(saut_ligne);
 
             }
+            
         }
 
         // Manipulation du plan (+ maj devis)
+
         void click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -150,13 +146,13 @@ namespace madera.Views
             string selectedValue = "";
             try
             {
-                selectedValue = gammePicker.Items[gammePicker.SelectedIndex];
+                selectedValue = pickerGamme.Items[pickerGamme.SelectedIndex];
             }
             catch (Exception)
             {
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
-
+            // TODO : remplacer par un switch
             if (selectedValue == "Aucune")
             {
                 button.BackgroundColor = Color.Default;
@@ -164,7 +160,16 @@ namespace madera.Views
                 //listeDevis.Children.Add(selectedValue);
 
             }
-            if (selectedValue == "Marron")
+            if (selectedValue == "Acier")
+            {
+                button.BackgroundColor = Color.Gray;
+                Xamarin.Forms.Label label_maron = new Label();
+                label_maron.Text = selectedValue;
+                label_maron.ClassId = "1";
+                listeDevis.Children.Add(label_maron);
+
+            }
+            if (selectedValue == "Bois")
             {
                 button.BackgroundColor = Color.Brown;
                 Xamarin.Forms.Label label_maron = new Label();
@@ -173,9 +178,18 @@ namespace madera.Views
                 listeDevis.Children.Add(label_maron);
 
             }
-            if (selectedValue == "Vert")
+            if (selectedValue == "Béton")
             {
-                button.BackgroundColor = Color.Green;
+                button.BackgroundColor = Color.Black;
+                Xamarin.Forms.Label label_green = new Label();
+                label_green.Text = selectedValue;
+                label_green.ClassId = "2";
+                listeDevis.Children.Add(label_green);
+            }
+
+            if (selectedValue == "Verre")
+            {
+                button.BackgroundColor = Color.Cyan;
                 Xamarin.Forms.Label label_green = new Label();
                 label_green.Text = selectedValue;
                 label_green.ClassId = "2";

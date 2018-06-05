@@ -20,18 +20,9 @@
                 </Grid.ColumnDefinitions>
 
 
-                    <!-- Scrolview  -->
-
+                <!-- Scrolview  -->
                 <ScrollView>
-                    <StackLayout x:Name="btn_gamme">
-                        <Label Text="Recherchez ..." Grid.Column="0"/>
-                        <Entry x:Name="recherche_piece" Grid.Column="0"/>
-
-                        <Label Text="Gamme" Grid.Column="0"/>
-                        <Picker x:Name="gammePicker">
-
-                        </Picker>
-
+                    <StackLayout x:Name="panneauSelection">
                     </StackLayout>
                 </ScrollView>
 
