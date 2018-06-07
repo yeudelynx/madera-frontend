@@ -14,6 +14,10 @@ namespace madera.Views
 		{
 			InitializeComponent ();
 
+        }
+
+        public void syncMyData(object sender, EventArgs e)
+        {
             try
             {
                 SyncDatas syncDatas = new SyncDatas();
@@ -23,7 +27,6 @@ namespace madera.Views
             {
                 Console.WriteLine("error : " + ex);
             }
-
         }
         
         public void SignInProcedure(object sender, EventArgs e)

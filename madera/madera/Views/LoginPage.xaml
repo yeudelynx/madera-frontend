@@ -24,6 +24,9 @@
             <Button x:Name="Btn_Signin" Text="Connexion" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#BF043055" Clicked="SignInProcedure" HeightRequest="50" />
+            <Button x:Name="Btn_Sync" Text="Synchronisation" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#BF043055" Clicked="syncMyData" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
