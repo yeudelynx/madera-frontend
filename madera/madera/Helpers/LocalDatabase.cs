@@ -27,7 +27,7 @@ namespace madera.Helpers
         public TableQuery<Unite> tableUnite { get; set; }
         public TableQuery<User> tableUser { get; set; }
 
-        public LocalDatabase(string dbName = "madera.db3")
+        public LocalDatabase(string dbName = "madera999.db3")
         {
             try
             {
@@ -91,6 +91,7 @@ namespace madera.Helpers
                 db.DeleteAll<Client>();
                 db.DeleteAll<Constituer>();
                 db.DeleteAll<Couleur>();
+                db.DeleteAll<Date>();
                 db.DeleteAll<Devis>();
                 db.DeleteAll<Gamme>();
                 db.DeleteAll<Magasin>();
@@ -100,6 +101,8 @@ namespace madera.Helpers
                 db.DeleteAll<Sol>();
                 db.DeleteAll<Unite>();
                 db.DeleteAll<User>();
+                Console.WriteLine("TRACE count tableCategorie after delete : " + tableCategorie.Count());
+                Console.WriteLine("TRACE count tableUsers after delete : " + tableUser.Count());
 
                 db.Insert(responseSync.date);
                 foreach (var categorie in responseSync.categories)
@@ -154,7 +157,8 @@ namespace madera.Helpers
                 {
                     db.Insert(user);
                 }
-
+                Console.WriteLine("TRACE count tableCategorie after fill with sync data : " + tableCategorie.Count());
+                Console.WriteLine("TRACE count tableUsers after fill with sync data : " + tableUser.Count());
                 return true;
             }catch (Exception ex){
                 Console.WriteLine("WriteSync error : " + ex);

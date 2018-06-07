@@ -14,6 +14,7 @@ namespace madera.Models
         public string adresse { get; set; }
         public string tel { get; set; }
         public string mail { get; set; }
+        public int user_id { get; set; }
         public String created_at { get; set; }
         public String updated_at { get; set; }
         public String deleted_at { get; set; }
