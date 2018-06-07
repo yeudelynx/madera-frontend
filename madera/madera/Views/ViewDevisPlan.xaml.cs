@@ -18,6 +18,8 @@ namespace madera.Views
         public int idplan;
         public int iduser;
 
+        public Picker pickerGamme;
+
         public string idBordelCLicke;
 
         public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
