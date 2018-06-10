@@ -43,13 +43,14 @@ namespace madera.Views
             var listeCategorie = db.tableCategorie.ToList();
             var listeModule = db.tableModule.ToList();
             
+
+            //panneau de gauche
             //picker Gamme
             pickerGamme.Title ="Gamme";
             pickerGamme.ItemDisplayBinding = new Binding("lib_gamme");
             pickerGamme.ItemsSource = listeGamme;
             panneauSelection.Children.Add(pickerGamme);
-
-
+            
             //picker Categorie
             pickerCategorie.Title = "Catégorie";
             pickerCategorie.ItemDisplayBinding = new Binding("lib_categorie");
@@ -61,14 +62,30 @@ namespace madera.Views
             pickerModule.ItemDisplayBinding = new Binding("lib_module");
             pickerModule.ItemsSource = listeModule;
             panneauSelection.Children.Add(pickerModule);
-            
+
+
+            // panneau de droite
+            Button element = new Button();
+            element.HeightRequest = 50;
+            element.WidthRequest = 10;
+            element.Text = "Clickmoaaa";
+            element.Clicked += new EventHandler(affectation);
+
+            panneauPlan.Children.Add(element);
+
+
+
+
+
+
         }
 
         // Manipulation du plan (+ maj devis)
 
-        void click(object sender, EventArgs e)
+        void affectation(object sender, EventArgs e)
         {
             var button = (Button)sender;
+            Console.WriteLine("yolo");
 
             string selectedValue ="";
             

@@ -7,13 +7,7 @@
         <ContentPage.Content>
             <Grid>
                 <!-- definition de ma grid 1 ligne 2 colones  -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="140" />
-                    <RowDefinition Height="140" />
-                    <RowDefinition Height="140" />
-                    <RowDefinition Height="140" />
 
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="3*" />
@@ -21,78 +15,14 @@
 
 
                 <!-- Scrolview  -->
-                <ScrollView>
-                    <StackLayout x:Name="panneauSelection">
-                    </StackLayout>
-                </ScrollView>
+                <StackLayout x:Name="panneauSelection" Grid.Column="0"></StackLayout>
 
-                <BoxView BackgroundColor="AliceBlue" Grid.Column="1" />
-                <Label Text="Zone du plan"  Grid.Column="1" HeightRequest="50" />
-
-                <Button Clicked="click" Grid.Column="0" Grid.Row="3" />
-                <Button Clicked="click" Grid.Column="0" Grid.Row="4" />
+                <StackLayout x:Name="panneauPlan" Grid.Column="1" BackgroundColor="AliceBlue"></StackLayout>
 
 
-                <!-- 
-                
-                Faire un plan fait de boutons
-                On selectionne un module dans la liste
-                On clique sur un bouton pour appliquer le module au plan
-               
-                              
-                -->
-                
 
 
-                <!-- Zone de droite  -->
-                <Grid Grid.Column="1">
-                    <!-- definition de ma seconde grid 2 lignes  -->
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
 
-                    <!-- frame bottom  -->
-
-                    <Frame Grid.Row="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Text="Longueur"  Grid.Column="0" />
-                            <Label Text="Largeur"  Grid.Column="1" />
-                            <Label Text="Hauteur"  Grid.Column="2" />
-                            <Label Text="Couleur"  Grid.Column="3" />
-
-                            <!-- dernier encars -->
-                            <Grid Grid.Column="4">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Label Text="Rotation" Grid.Column="0"/>
-
-                                <!-- boutons rotate -->
-
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Text="(((" Grid.Column="0"/>
-                                    <Label Text=")))" Grid.Column="1"/>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Frame>
-                </Grid>
             </Grid>
         </ContentPage.Content>
     </ContentPage>
