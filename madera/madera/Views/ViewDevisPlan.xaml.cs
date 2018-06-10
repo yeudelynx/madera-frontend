@@ -63,8 +63,43 @@ namespace madera.Views
             pickerModule.ItemsSource = listeModule;
             panneauSelection.Children.Add(pickerModule);
 
+           // dynamic plan = new Newtonsoft.Json.Linq.JObject();
+                
+           // plan = "[{ "x": "0", "y": "0"}, { "x": "5", "y": "0"}, { "x": "0", "y": "5"}, { "x": "5", "y": "5"}]";
+
+
 
             // panneau de droite
+
+            /* algo placement points : 
+
+
+        tracé mur du bas       
+        a = x;
+        while (plan.0.x <= plan.1.x) 
+            {
+                fait un bouton avec coordonnée (a, y)
+                a++
+            }
+
+        tracé mur de gauche 
+        a = y;
+        while (plan.0.x <= plan.3.x)
+            {
+                fait un bouton avec coordonnée (x, a)
+                a++
+            }
+
+             
+            
+     
+              */
+
+            while (true)
+            {
+
+            }
+
             Button element = new Button();
             element.HeightRequest = 50;
             element.WidthRequest = 10;
