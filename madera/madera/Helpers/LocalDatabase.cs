@@ -27,7 +27,7 @@ namespace madera.Helpers
         public TableQuery<Unite> tableUnite { get; set; }
         public TableQuery<User> tableUser { get; set; }
 
-        public LocalDatabase(string dbName = "madera999.db3")
+        public LocalDatabase(string dbName = "madera998.db3")
         {
             try
             {
