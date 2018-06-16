@@ -63,9 +63,20 @@ namespace madera.Views
             pickerModule.ItemsSource = listeModule;
             panneauSelection.Children.Add(pickerModule);
 
-           // dynamic plan = new Newtonsoft.Json.Linq.JObject();
-                
-           // plan = "[{ "x": "0", "y": "0"}, { "x": "5", "y": "0"}, { "x": "0", "y": "5"}, { "x": "5", "y": "5"}]";
+
+            // table sol...
+
+            var listePointsSol = db.tableSol.ToList();
+
+
+
+
+            // dynamic plan = new Newtonsoft.Json.Linq.JObject();
+
+            // {x1 : '9', x2 : '9', x3 : '9', x4 : '9'}
+
+
+            // plan = "[{ "x": "0", "y": "0"}, { "x": "5", "y": "0"}, { "x": "0", "y": "5"}, { "x": "5", "y": "5"}]";
 
 
 
@@ -90,15 +101,9 @@ namespace madera.Views
                 a++
             }
 
-             
-            
-     
-              */
+           
 
-            while (true)
-            {
-
-            }
+            }*/
 
             Button element = new Button();
             element.HeightRequest = 50;
