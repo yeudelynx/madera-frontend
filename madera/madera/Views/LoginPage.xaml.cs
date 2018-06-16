@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using madera.Helpers;
 using madera.Models;
 using System.Linq;
+using System.Diagnostics;
 
 namespace madera.Views
 {
@@ -15,7 +16,7 @@ namespace madera.Views
 			InitializeComponent ();
 
         }
-        
+
         public void SignInProcedure(object sender, EventArgs e)
         {
             
