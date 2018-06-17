@@ -4,5 +4,9 @@
              x:Class="madera.Views.ViewDevisPlan">
   <!--Pages can be added as references or inline-->
     <ContentPage Title="Plan" />
-    <ContentPage Title="Devis" />
+    <ContentPage Title="Devis">
+  
+        <Label x:Name="contenu_devis" Text="" />
+
+    </ContentPage>
 </TabbedPage>
