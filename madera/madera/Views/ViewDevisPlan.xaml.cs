@@ -42,7 +42,6 @@ namespace madera.Views
             var listeGamme = db.tableGamme.ToList();
             var listeCategorie = db.tableCategorie.ToList();
             var listeModule = db.tableModule.ToList();
-            
 
             //panneau de gauche
             //picker Gamme
@@ -65,25 +64,12 @@ namespace madera.Views
 
 
             // table sol...
-
-            var listePointsSol = db.tableSol.ToList();
-
-
-
-
-            // dynamic plan = new Newtonsoft.Json.Linq.JObject();
+            //var listePointsSol = db.tableSol.ToList();
 
             // {x1 : '9', x2 : '9', x3 : '9', x4 : '9'}
 
-
-            // plan = "[{ "x": "0", "y": "0"}, { "x": "5", "y": "0"}, { "x": "0", "y": "5"}, { "x": "5", "y": "5"}]";
-
-
-
             // panneau de droite
-
             /* algo placement points : 
-
 
         tracé mur du bas       
         a = x;
@@ -101,19 +87,63 @@ namespace madera.Views
                 a++
             }
 
-           
-
             }*/
 
-            Button element = new Button();
-            element.HeightRequest = 50;
-            element.WidthRequest = 10;
-            element.Text = "Clickmoaaa";
-            element.Clicked += new EventHandler(affectation);
+            int x0 = 0;
+            int y0 = 0;
 
-            panneauPlan.Children.Add(element);
+            int x1 = 5;
+            int y1 = 0;
+
+            int x2 = 5;
+            int y2 = 5;
+
+            int x3 = 0;
+            int y3 = 5;
+
+            var gridPanneauGauche = new Grid();
+            layoutPlan.Children.Add(gridPanneauGauche);
+
+      
+
+            // mur du bas 
+            while (x0 < x1)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, x0, 5);
+                x0++;
+            }
+
+            // mur de droite 
+            while (y1 < y2)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, 4, y1);
+                y1++;
+            }
+
+            // mur du haut 
+            while (x3 < x2)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, x3, 0);
+                x3++;
+            }
+
+            // mur de gauche 
+            while (y0 < y3)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, 0, y0);
+                y0++;
+            }
 
 
+            
 
 
 
@@ -125,8 +155,6 @@ namespace madera.Views
         void affectation(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            Console.WriteLine("yolo");
-
             string selectedValue ="";
             
             // servira à recupérer les coordonnées dans l'espace => x y z
@@ -148,7 +176,6 @@ namespace madera.Views
             }
             if (selectedValue == "Mur")
             {
-                Console.WriteLine(selectedValue);
                 button.BackgroundColor = Color.Blue;
                 Xamarin.Forms.Label label_maron = new Label();
                 label_maron.Text = selectedValue;
@@ -157,7 +184,6 @@ namespace madera.Views
             }
             if (selectedValue == "Porte")
             {
-                Console.WriteLine(selectedValue);
                 button.BackgroundColor = Color.Brown;
                 Xamarin.Forms.Label label_maron = new Label();
                 label_maron.Text = selectedValue;
@@ -166,7 +192,6 @@ namespace madera.Views
             }
             if (selectedValue == "Fenêtre")
             {
-                Console.WriteLine(selectedValue);
                 button.BackgroundColor = Color.Black;
                 Xamarin.Forms.Label label_green = new Label();
                 label_green.Text = selectedValue;

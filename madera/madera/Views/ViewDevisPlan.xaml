@@ -17,7 +17,12 @@
                 <!-- Scrolview  -->
                 <StackLayout x:Name="panneauSelection" Grid.Column="0"></StackLayout>
 
-                <StackLayout x:Name="panneauPlan" Grid.Column="1" BackgroundColor="AliceBlue"></StackLayout>
+                <StackLayout x:Name="layoutPlan" Grid.Column="1" BackgroundColor="AliceBlue">
+                    <Grid x:Name="panneauPlan"></Grid>
+                    
+                    
+                    
+                </StackLayout>
 
 
 
