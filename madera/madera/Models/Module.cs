@@ -7,8 +7,9 @@ namespace madera.Models
 {
     public class Module
     {
-        [PrimaryKey, AutoIncrement]
+        //[PrimaryKey, AutoIncrement]
         public int id { get; set; }
+        public string lib_module { get; set; }
         public double prix { get; set; }
         public double longueur { get; set; }
         public double hauteur { get; set; }

@@ -27,7 +27,7 @@ namespace madera.Helpers
         public TableQuery<Unite> tableUnite { get; set; }
         public TableQuery<User> tableUser { get; set; }
 
-        public LocalDatabase(string dbName = "madera999.db3")
+        public LocalDatabase(string dbName = "madera996.db3")
         {
             try
             {
@@ -147,6 +147,7 @@ namespace madera.Helpers
                 }
                 foreach (var sol in responseSync.sols)
                 {
+                    sol.list_point_sol = "[{\"x\": \"2\", \"y\": \"5\"}, {\"x\": \"2\", \"y\": \"96\"}, {\"x\": \"92\", \"y\": \"97\"}, {\"x\": \"99\", \"y\": \"8\"}]";
                     db.Insert(sol);
                 }
                 foreach (var unite in responseSync.unites)
@@ -157,6 +158,8 @@ namespace madera.Helpers
                 {
                     db.Insert(user);
                 }
+
+
                 Console.WriteLine("TRACE count tableCategorie after fill with sync data : " + tableCategorie.Count());
                 Console.WriteLine("TRACE count tableUsers after fill with sync data : " + tableUser.Count());
                 return true;

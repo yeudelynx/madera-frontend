@@ -18,11 +18,13 @@ namespace madera.Views
         public int idplan;
         public int iduser;
 
+        public Picker pickerGamme = new Picker();
+        public Picker pickerCategorie = new Picker();
+        public Picker pickerModule = new Picker();
+
+
         public string idBordelCLicke;
 
-        public class CustomButton : Button
-        {
-        }
         public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
         {
             this.idclient = idclient;
@@ -31,132 +33,140 @@ namespace madera.Views
             this.iduser = iduser;
 
         }
+        
         public ViewDevisPlan()
         {
             InitializeComponent();
 
             LocalDatabase db = new LocalDatabase();
-            var tableGamme = db.tableGamme.ToList();
-            var tableCategorie = db.tableCategorie.ToList();
-            var tableModule = db.tableModule.ToList();
+            var listeGamme = db.tableGamme.ToList();
+            var listeCategorie = db.tableCategorie.ToList();
+            var listeModule = db.tableModule.ToList();
 
-            // à supprimer quand j'aurai des données 
-            Xamarin.Forms.Label label_test = new Label();
-            label_test.Text = "Module noir";
-            label_test.GestureRecognizers.Add(new TapGestureRecognizer()
+            //panneau de gauche
+            //picker Gamme
+            pickerGamme.Title ="Gamme";
+            pickerGamme.ItemDisplayBinding = new Binding("lib_gamme");
+            pickerGamme.ItemsSource = listeGamme;
+            panneauSelection.Children.Add(pickerGamme);
+            
+            //picker Categorie
+            pickerCategorie.Title = "Catégorie";
+            pickerCategorie.ItemDisplayBinding = new Binding("lib_categorie");
+            pickerCategorie.ItemsSource = listeCategorie;
+            panneauSelection.Children.Add(pickerCategorie);
+
+            //picker Module
+            pickerModule.Title = "Module";
+            pickerModule.ItemDisplayBinding = new Binding("lib_module");
+            pickerModule.ItemsSource = listeModule;
+            panneauSelection.Children.Add(pickerModule);
+
+
+            // table sol...
+            //var listePointsSol = db.tableSol.ToList();
+
+            // {x1 : '9', x2 : '9', x3 : '9', x4 : '9'}
+
+            // panneau de droite
+            /* algo placement points : 
+
+        tracé mur du bas       
+        a = x;
+        while (plan.0.x <= plan.1.x) 
             {
-                // 1 => afficher les valeurs du bazar selectionné dans les specs en bas
+                fait un bouton avec coordonnée (a, y)
+                a++
+            }
 
-                Command = new Command(() =>
-                {
-                    // liste d'actions du onclick
-                    //test.Text = "Module noir";
-                    idBordelCLicke = "idBordelCLicke";
-
-                })
-            });
-
-            btn_gamme.Children.Add(label_test);
-
-            // à supprimer quand j'aurai des données 
-            Xamarin.Forms.Label label_test2 = new Label();
-            label_test2.Text = "Module blanc";
-            label_test2.GestureRecognizers.Add(new TapGestureRecognizer()
+        tracé mur de gauche 
+        a = y;
+        while (plan.0.x <= plan.3.x)
             {
-                // 1 => afficher les valeurs du bazar selectionné dans les specs en bas
+                fait un bouton avec coordonnée (x, a)
+                a++
+            }
 
-                Command = new Command(() =>
-                {
-                    // liste d'actions du onclick
-                    //test.Text = "Module blanc";
-                })
-            });
+            }*/
 
-            btn_gamme.Children.Add(label_test2);
+            int x0 = 0;
+            int y0 = 0;
 
-            gammePicker.Items.Add("Aucune");
-            gammePicker.Items.Add("Marron");
-            gammePicker.Items.Add("Vert");
+            int x1 = 5;
+            int y1 = 0;
 
+            int x2 = 5;
+            int y2 = 5;
 
+            int x3 = 0;
+            int y3 = 5;
+
+            var gridPanneauGauche = new Grid();
+            layoutPlan.Children.Add(gridPanneauGauche);
+
+      
+
+            // mur du bas 
+            while (x0 < x1)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, x0, 5);
+                x0++;
+            }
+
+            // mur de droite 
+            while (y1 < y2)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, 4, y1);
+                y1++;
+            }
+
+            // mur du haut 
+            while (x3 < x2)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, x3, 0);
+                x3++;
+            }
+
+            // mur de gauche 
+            while (y0 < y3)
+            {
+                Button element = new Button();
+                element.Clicked += new EventHandler(affectation);
+                panneauPlan.Children.Add(element, 0, y0);
+                y0++;
+            }
 
 
             
-            // label de la gamme 
-            foreach (var gamme in tableGamme)
-            {
-                Xamarin.Forms.Label label_gamme = new Label();
-                label_gamme.Text = gamme.lib_gamme;
-                btn_gamme.Children.Add(label_gamme);
-
-                // label des catégories
-                foreach (var categorie in tableCategorie)
-                {
-                    Xamarin.Forms.Label label_categorie = new Label();
-                    label_categorie.Text = categorie.lib_categorie;
-                    Thickness marge_categorie = label_categorie.Margin;
-                    marge_categorie.Left = 20;
-                    label_categorie.Margin = marge_categorie;
-                    btn_gamme.Children.Add(label_categorie);
-                    Console.WriteLine(label_gamme.Text);
-                    
-                    // label des modules 
-                    foreach (var module in tableModule)
-                    {
-                        Xamarin.Forms.Label label_module = new Label();
-                        // => bug sur l'ID (balance un nombre random qui s'incrémente à chaque compilation)
-                        label_module.Text = module.id.ToString();
-                        Console.WriteLine(label_module.Text);
-                        Thickness marge_module = label_module.Margin;
-                        marge_module.Left = 40;
-                        label_module.Margin = marge_module;
-
-                        //libele clickable => rendre le lien plus joli ?
-                        label_module.GestureRecognizers.Add(new TapGestureRecognizer()
-                        {
-                            // 1 => afficher les valeurs du bazar selectionné dans les specs en bas
-
-                            // 2 => le positionner sur le plan
-                            Command = new Command(() =>
-                            {
-                                DisplayAlert("Task", "Clicked " + module.longueur, "ok");
-                            })
-                            //Command = new Command(() => Console.WriteLine(module.id)),
-                        });
-                        btn_gamme.Children.Add(label_module);
-                    }
-
-
-                }
-
-                Xamarin.Forms.Label saut_ligne = new Label();
-                saut_ligne.Text = "\n";
-
-                //btn_gamme.Children.Add(Mur);
-                btn_gamme.Children.Add(saut_ligne);
 
 
 
 
-            }
         }
 
         // Manipulation du plan (+ maj devis)
-        void click(object sender, EventArgs e)
+
+        void affectation(object sender, EventArgs e)
         {
             var button = (Button)sender;
+            string selectedValue ="";
+            
             // servira à recupérer les coordonnées dans l'espace => x y z
-            // var classId = button.ClassId;
-            string selectedValue = "";
             try
             {
-                selectedValue = gammePicker.Items[gammePicker.SelectedIndex];
+                selectedValue = pickerCategorie.Items[pickerCategorie.SelectedIndex];
             }
             catch (Exception)
             {
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
-
+            // TODO : remplacer par un switch
             if (selectedValue == "Aucune")
             {
                 button.BackgroundColor = Color.Default;
@@ -164,25 +174,29 @@ namespace madera.Views
                 //listeDevis.Children.Add(selectedValue);
 
             }
-            if (selectedValue == "Marron")
+            if (selectedValue == "Mur")
+            {
+                button.BackgroundColor = Color.Blue;
+                Xamarin.Forms.Label label_maron = new Label();
+                label_maron.Text = selectedValue;
+                listeDevis.Children.Add(label_maron);
+
+            }
+            if (selectedValue == "Porte")
             {
                 button.BackgroundColor = Color.Brown;
                 Xamarin.Forms.Label label_maron = new Label();
                 label_maron.Text = selectedValue;
-                label_maron.ClassId = "1";
                 listeDevis.Children.Add(label_maron);
 
             }
-            if (selectedValue == "Vert")
+            if (selectedValue == "Fenêtre")
             {
-                button.BackgroundColor = Color.Green;
+                button.BackgroundColor = Color.Black;
                 Xamarin.Forms.Label label_green = new Label();
                 label_green.Text = selectedValue;
-                label_green.ClassId = "2";
                 listeDevis.Children.Add(label_green);
             }
-
-
 
 
         }
