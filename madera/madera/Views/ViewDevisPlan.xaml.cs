@@ -29,7 +29,7 @@ namespace madera.Views
             this.afficherDevis();
 
         }
-
+        
         public ViewDevisPlan(int iduser, int idclient, int iddevis)
         {
 
@@ -55,11 +55,11 @@ namespace madera.Views
             }
 
             //récupérer la catégorie du module
-            List<Categorie> categories = new List<Categorie>();
+            /*List<Categorie> categories = new List<Categorie>();
             foreach(var module in modules) {
                 
                 categories.Add(database.tableCategorie.Where(categorie => module.categorie_id == categorie.id).ToList()[0]);        
-            }
+            }*/
 
 
             //Pour chaque module, récupère une gamme
@@ -89,7 +89,7 @@ namespace madera.Views
                
                 StringBuilder builder = new StringBuilder("-");
                 for(int i = 0; i < modules.Count; i++) {
-                    builder.Append(categories[i].lib_categorie).Append(matieres[i].lib_matiere).Append('\n').Append("-");
+                    builder.Append(matieres[i].lib_matiere).Append(modules[i].prix).Append(" ").Append("euros").Append('\n').Append("-");
                 }
 
                 contenu_devis.Text = builder.ToString();

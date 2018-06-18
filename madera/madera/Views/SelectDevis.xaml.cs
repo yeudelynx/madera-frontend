@@ -54,7 +54,8 @@ namespace madera.Views
         public void select_devis(object sender, EventArgs e, int id)
         {
             int iddevis = id;
-            var mainpages = new ViewDevisPlan() { iduser = iduser, idclient = idclient, iddevis = id };
+            //var mainpages = new ViewDevisPlan() { iduser = iduser, idclient = idclient, iddevis = id };
+            var mainpages = new ViewDevisPlan(iduser, idclient, id) ;
             Navigation.PushAsync(mainpages);
             NavigationPage.SetHasNavigationBar(mainpages, false);
 
