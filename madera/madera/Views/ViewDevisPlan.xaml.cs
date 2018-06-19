@@ -1,6 +1,8 @@
 ﻿using madera.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +90,18 @@ namespace madera.Views
             }
 
             }*/
+
+            List<Point> listePoints = new List<Point>();
+
+            var listeSols = db.tableSol.ToList();
+
+            listePoints = JsonConvert.DeserializeObject<List<Point>>(listeSols[1].list_point_sol);
+
+            foreach (var p in listePoints)
+            {
+                Debug.WriteLine("Point x : " + p.X);
+                Debug.WriteLine("Point y : " + p.Y);
+            }
 
             int x0 = 0;
             int y0 = 0;
