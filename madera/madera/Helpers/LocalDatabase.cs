@@ -84,7 +84,8 @@ namespace madera.Helpers
             }
         }
 
-        public Boolean WriteSync(ResponseSync responseSync){
+        public Boolean WriteSync(ResponseSync responseSync)
+        {
             try
             {
                 db.DeleteAll<Categorie>();
@@ -156,7 +157,9 @@ namespace madera.Helpers
                 }
 
                 return true;
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine("WriteSync error : " + ex);
                 return false;
             }

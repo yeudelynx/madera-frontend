@@ -2,7 +2,100 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="madera.Views.ViewDevisPlan">
+<<<<<<< Updated upstream
   <!--Pages can be added as references or inline-->
     <ContentPage Title="Plan" />
     <ContentPage Title="Devis" />
+=======
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Prévisualisation">
+        <ContentPage.Content>
+            <Grid>
+                <!-- definition de ma grid 1 ligne 2 colones  -->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+
+                <!-- Scrolview  -->
+                <StackLayout x:Name="panneauSelection" Grid.Column="0"></StackLayout>
+
+                <StackLayout x:Name="layoutPlan" Grid.Column="1" BackgroundColor="AliceBlue">
+                    <Grid x:Name="panneauPlan"></Grid>
+
+
+
+                </StackLayout>
+
+
+
+
+
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>
+
+
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Devis">
+        <ContentPage.Content>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- liste de gauche -->
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="Recherchez ..." Grid.Column="0"/>
+                        <Entry x:Name="recherche_devis" Grid.Column="0"/>
+                        <Label Text="Devis 1" Grid.Column="0"/>
+                        <Label Text="Revision 1"  Grid.Column="0"/>
+                        <Label Text="Revision 2" Grid.Column="0"/>
+                        <Label Text="Revision 3"  Grid.Column="0"/>
+                        <Label Text="Devis 2"  Grid.Column="0"/>
+                        <Label Text="Revision 1" Grid.Column="0"/>
+                        <Label Text="Revision 2" Grid.Column="0"/>
+                        <Label Text="Revision 3"  Grid.Column="0"/>
+                        <Label Text="Devis 1" Grid.Column="0"/>
+                        <Label Text="Revision 1"  Grid.Column="0"/>
+                        <Label Text="Revision 2" Grid.Column="0"/>
+                        <Label Text="Revision 3"  Grid.Column="0"/>
+                        <Label Text="Devis 2"  Grid.Column="0"/>
+                        <Label Text="Revision 1" Grid.Column="0"/>
+                        <Label Text="Revision 2" Grid.Column="0"/>
+                        <Label Text="Revision 3"  Grid.Column="0"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <!-- Zone de droite  -->
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <!-- definition de ma seconde grid 2 lignes  -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="5*" />
+                    </Grid.RowDefinitions>
+                    <!-- frame bouton du haut  -->
+
+                    <Frame Grid.Row="0">
+                        <Grid>
+                            <Button x:Name="sauvegarde" Text="Sauvegarder"   Grid.Column="0" />
+                            <Button x:Name="synchroniser" Text="Synchroniser" Grid.Column="1" />
+                            <Label Text="Devis gnah gnah"  Grid.Column="2" />
+                            <Button x:Name="email" Text="Email" Grid.Column="3" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView BackgroundColor="AliceBlue" Grid.Row="1"/>
+                    <StackLayout x:Name="listeDevis" Grid.Row="1">
+
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>
+>>>>>>> Stashed changes
 </TabbedPage>
