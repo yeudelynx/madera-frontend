@@ -1,5 +1,8 @@
-﻿using System;
+﻿using madera.Helpers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +15,9 @@ namespace madera.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewDevisPlan : TabbedPage
     {
-        public int iduser;
         public int idclient;
         public int iddevis;
         public int idplan;
-<<<<<<< Updated upstream
-        public ViewDevisPlan ()
-        {
-            InitializeComponent();
-=======
         public int iduser;
 
         public Picker pickerGamme = new Picker();
@@ -75,7 +72,6 @@ namespace madera.Views
 
             // panneau de droite
             /* algo placement points : 
-
         tracé mur du bas       
         a = x;
         while (plan.0.x <= plan.1.x) 
@@ -83,7 +79,6 @@ namespace madera.Views
                 fait un bouton avec coordonnée (a, y)
                 a++
             }
-
         tracé mur de gauche 
         a = y;
         while (plan.0.x <= plan.3.x)
@@ -91,8 +86,19 @@ namespace madera.Views
                 fait un bouton avec coordonnée (x, a)
                 a++
             }
-
             }*/
+
+            List<Point> listePoints = new List<Point>();
+
+            var listeSols = db.tableSol.ToList();
+
+            listePoints = JsonConvert.DeserializeObject<List<Point>>(listeSols[1].list_point_sol);
+
+            foreach (var p in listePoints)
+            {
+                Debug.WriteLine("Point x : " + p.X);
+                Debug.WriteLine("Point y : " + p.Y);
+            }
 
             int x0 = 0;
             int y0 = 0;
@@ -204,15 +210,22 @@ namespace madera.Views
             }
 
 
->>>>>>> Stashed changes
         }
 
-        public ViewDevisPlan(int iduser, int idclient, int iddevis, int idplan)
+        public void view_devis_plan(object sender, EventArgs e)
         {
-            this.iduser = iduser;
-            this.idclient = idclient;
-            this.iddevis = iddevis;
-            this.idplan = idplan;
+            var MainPages = new ViewDevisPlan();
+            Navigation.PushAsync(MainPages);
+            NavigationPage.SetHasNavigationBar(MainPages, false);
+
         }
+
+
+
+
+
+
     }
+
+
 }
