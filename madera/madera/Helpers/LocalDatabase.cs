@@ -145,10 +145,19 @@ namespace madera.Helpers
                 {
                     db.Insert(remise);
                 }
+                int cpt = 0;
                 foreach (var sol in responseSync.sols)
                 {
-                    sol.list_point_sol = "[{\"x\": \"2\", \"y\": \"5\"}, {\"x\": \"2\", \"y\": \"96\"}, {\"x\": \"92\", \"y\": \"97\"}, {\"x\": \"99\", \"y\": \"8\"}]";
+                    if (cpt == 0)
+                        sol.list_point_sol = "[{\"X\": \"0\", \"Y\": \"0\"}, {\"X\": \"5\", \"Y\": \"0\"}, {\"X\": \"5\", \"Y\": \"5\"}, {\"X\": \"0\", \"Y\": \"5\"}]";
+                    else if (cpt == 1)
+                        sol.list_point_sol = "[{\"X\": \"0\", \"Y\": \"0\"}, {\"X\": \"10\", \"Y\": \"0\"}, {\"X\": \"10\", \"Y\": \"10\"}, {\"X\": \"0\", \"Y\": \"10\"}]";
+                    else if(cpt == 2)
+                        sol.list_point_sol = "[{\"X\": \"0\", \"Y\": \"0\"}, {\"X\": \"8\", \"Y\": \"0\"}, {\"X\": \"8\", \"Y\": \"5\"}, {\"X\": \"0\", \"Y\": \"5\"}]";
+                    else
+                        sol.list_point_sol = "[{\"X\": \"0\", \"Y\": \"0\"}, {\"X\": \"5\", \"Y\": \"0\"}, {\"X\": \"5\", \"Y\": \"8\"}, {\"X\": \"0\", \"Y\": \"8\"}]";
                     db.Insert(sol);
+                    cpt++;
                 }
                 foreach (var unite in responseSync.unites)
                 {
