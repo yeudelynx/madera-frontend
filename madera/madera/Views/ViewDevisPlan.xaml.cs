@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using madera.Models;
-using madera.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,7 +25,14 @@ namespace madera.Views
         public Picker pickerModule = new Picker();
 
 
-        public string idBordelCLicke;
+        public string selectedValue;
+        public string selectedModule;
+
+        public List<Button> listeBoutton = new List<Button>();
+        public List<Label> listeLabel = new List<Label>();
+
+
+
 
         public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
         {
@@ -47,6 +53,8 @@ namespace madera.Views
             var listeModule = db.tableModule.ToList();
 
             //panneau de gauche
+
+
             //picker Gamme
             pickerGamme.Title ="Gamme";
             pickerGamme.ItemDisplayBinding = new Binding("lib_gamme");
@@ -119,8 +127,6 @@ namespace madera.Views
             var gridPanneauGauche = new Grid();
             layoutPlan.Children.Add(gridPanneauGauche);
 
-      
-
             // mur du bas 
             while (x0 < x1)
             {
@@ -128,6 +134,8 @@ namespace madera.Views
                 element.Clicked += new EventHandler(affectation);
                 panneauPlan.Children.Add(element, x0, 5);
                 x0++;
+                listeBoutton.Add(element);
+
             }
 
             // mur de droite 
@@ -137,6 +145,8 @@ namespace madera.Views
                 element.Clicked += new EventHandler(affectation);
                 panneauPlan.Children.Add(element, 4, y1);
                 y1++;
+                listeBoutton.Add(element);
+
             }
 
             // mur du haut 
@@ -146,6 +156,8 @@ namespace madera.Views
                 element.Clicked += new EventHandler(affectation);
                 panneauPlan.Children.Add(element, x3, 0);
                 x3++;
+                listeBoutton.Add(element);
+
             }
 
             // mur de gauche 
@@ -153,47 +165,45 @@ namespace madera.Views
             {
                 Button element = new Button();
                 element.Clicked += new EventHandler(affectation);
+                Console.WriteLine(selectedModule);
                 panneauPlan.Children.Add(element, 0, y0);
                 y0++;
+                listeBoutton.Add(element);
+
             }
-
-
-            
-
-
 
 
         }
 
-        // Manipulation du plan (+ maj devis)
-
+        // Manipulation du plan
         void affectation(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            string selectedValue ="";
-            
+
+            selectedValue = "";
+            selectedModule = "";
+
+
             // servira à recupérer les coordonnées dans l'espace => x y z
             try
             {
                 selectedValue = pickerCategorie.Items[pickerCategorie.SelectedIndex];
+                selectedModule = pickerModule.Items[pickerModule.SelectedIndex];
+
             }
             catch (Exception)
             {
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
-            // TODO : remplacer par un switch
             if (selectedValue == "Aucune")
             {
                 button.BackgroundColor = Color.Default;
-                // j'enleve le machin du devis where 
-                //listeDevis.Children.Add(selectedValue);
 
             }
             if (selectedValue == "Mur")
             {
                 button.BackgroundColor = Color.Blue;
                 Xamarin.Forms.Label label_maron = new Label();
-                label_maron.Text = selectedValue;
                 listeDevis.Children.Add(label_maron);
 
             }
@@ -201,7 +211,6 @@ namespace madera.Views
             {
                 button.BackgroundColor = Color.Brown;
                 Xamarin.Forms.Label label_maron = new Label();
-                label_maron.Text = selectedValue;
                 listeDevis.Children.Add(label_maron);
 
             }
@@ -209,12 +218,49 @@ namespace madera.Views
             {
                 button.BackgroundColor = Color.Black;
                 Xamarin.Forms.Label label_green = new Label();
-                label_green.Text = selectedValue;
                 listeDevis.Children.Add(label_green);
             }
+            
+            button.Text = selectedModule;
+
+            /*
+             Pour chaque bouton présent : 
+             
+             */
+
+            foreach (Button boutton in listeBoutton)
+            {
+                if (boutton.GetType() == typeof(Button))
+                {
+
+                    if (boutton.Text != "")
+                    {
+                        
+                        Xamarin.Forms.Label labelDevis = new Label();
+                        labelDevis.Text = boutton.Text;
+                        listeLabel.Add(labelDevis);
+                    }
 
 
+                }
+            }
         }
+
+        // maj ihm devis
+        void actualisation(object sender, EventArgs e)
+        {
+
+            foreach (var label in listeLabel)
+            {
+                if(label.Text != "") {
+                    Xamarin.Forms.Label toto = new Label();
+                    toto.Text = "label choisi : ";
+                    listeDevis.Children.Add(toto);
+                    listeDevis.Children.Add(label);
+                }
+            }
+        }
+        
 
         public void view_devis_plan(object sender, EventArgs e)
         {
@@ -224,7 +270,7 @@ namespace madera.Views
 
         }
 
-        public ViewDevisPlan(int iduser, int idclient, int iddevis, int idplan)
+       /* public ViewDevisPlan(int iduser, int idclient, int iddevis, int idplan)
         {
             
             InitializeComponent();
@@ -234,80 +280,19 @@ namespace madera.Views
             this.idplan = idplan;
             this.afficherDevis();
 
-        }
-        
-        public ViewDevisPlan(int iduser, int idclient, int iddevis)
+        }*/
+
+            public ViewDevisPlan(int iduser, int idclient, int iddevis)
         {
 
             InitializeComponent();
             this.iduser = iduser;
             this.idclient = idclient;
             this.iddevis = iddevis;
-            this.afficherDevis();
 
         }
 
-
-
-        public void afficherDevis() {
-            LocalDatabase database = new LocalDatabase();
-            Devis devisFinal = database.tableDevis.Where(devis => devis.id == this.iddevis).ToList()[0];
-            List<Constituer> constituers = database.tableConstituer.Where(module => module.devis_id == devisFinal.id).ToList();
-
-            //la liste de tous les modules constituant le devis final
-            List<Module> modules = new List<Module>();
-            foreach(var occurenceConstituer in constituers) {
-                modules.Add(database.tableModule.Where(module => module.id == occurenceConstituer.module_id).ToList()[0]);
-            }
-
-            //récupérer la catégorie du module
-            /*List<Categorie> categories = new List<Categorie>();
-            foreach(var module in modules) {
-                
-                categories.Add(database.tableCategorie.Where(categorie => module.categorie_id == categorie.id).ToList()[0]);        
-            }*/
-
-
-            //Pour chaque module, récupère une gamme
-            List<Gamme> gammes = new List<Gamme>();
-
-
-            /*foreach (var moduleItem in modules){
-                 
-                if (database.tableGamme.Where(gamme => gamme.id == moduleItem.gamme_id).ToList()[0] == null)
-                {
-                    contenu_devis.Text = "Aucune gamme trouvée.";
-                }
-                else
-                {
-                    gammes.Add(database.tableGamme.Where(gamme => gamme.id == moduleItem.gamme_id).ToList()[0]);
-                }
-            }*/
-
-
-            //On récupère également la matière de chaque module
-            List<Matiere> matieres = new List<Matiere>();
-            foreach(var constituer in constituers){
-                matieres.Add(database.tableMatiere.Where(matiere => matiere.id == constituer.matiere_id).ToList()[0]);
-            }
-
-            if (modules.Count == matieres.Count) {
-               
-                StringBuilder builder = new StringBuilder("-");
-                for(int i = 0; i < modules.Count; i++) {
-                    builder.Append(matieres[i].lib_matiere).Append(modules[i].prix).Append(" ").Append("euros").Append('\n').Append("-");
-                }
-
-                contenu_devis.Text = builder.ToString();
-            }
-
-
-
-
-        }
-
-        
     }
-
-
+      
 }
+
