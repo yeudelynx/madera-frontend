@@ -13,6 +13,8 @@ namespace madera.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewDevisPlan : TabbedPage
     {
+        /*La liste des objets labels ajoutés pour pouvoir rechercher la catégorie des modules par le libellé présent dans le champ text.*/
+        private List<Label> labels;
         public int idclient;
         public int iddevis;
         public int idplan;
@@ -25,11 +27,10 @@ namespace madera.Views
 
         public string idBordelCLicke;
 
-        public ViewDevisPlan(int idclient, int iddevis, int idplan, int iduser)
+        public ViewDevisPlan(int idclient, int iddevis, int iduser)
         {
             this.idclient = idclient;
             this.iddevis = iddevis;
-            this.idplan = idplan;
             this.iduser = iduser;
 
         }
@@ -37,8 +38,9 @@ namespace madera.Views
         public ViewDevisPlan()
         {
             InitializeComponent();
-
+            
             LocalDatabase db = new LocalDatabase();
+            labels = new List<Label>();
             var listeGamme = db.tableGamme.ToList();
             var listeCategorie = db.tableCategorie.ToList();
             var listeModule = db.tableModule.ToList();
@@ -150,8 +152,11 @@ namespace madera.Views
 
         }
 
-        // Manipulation du plan (+ maj devis)
-
+        
+        /**
+         * Ecouteur pemettant d'ajouter ou d'enlever un module
+         * dans le plan.
+         */
         void affectation(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -167,39 +172,106 @@ namespace madera.Views
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
             // TODO : remplacer par un switch
-            if (selectedValue == "Aucune")
+            switch (selectedValue)
             {
-                button.BackgroundColor = Color.Default;
-                // j'enleve le machin du devis where 
-                //listeDevis.Children.Add(selectedValue);
+                case "Aucune":
 
+                    button.BackgroundColor = Color.Default;
+                    // j'enleve le machin du devis where 
+                    //listeDevis.Children.Add(selectedValue);
+                    break;
+                case "Mur":
+
+                    if (button.BackgroundColor == Color.Blue)
+                    {
+                        //le boutton a été cliqué
+                        Label labelItem = chercherCategorie("Mur");
+                        labels.Remove(labelItem);
+                        listeDevis.Children.Remove(labelItem);
+                        button.BackgroundColor = Color.Default;
+                    }
+                    else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Blue)
+                    {
+                        //Un autre module a déjà été placé. Ne rien faire.
+                    }
+                    else
+                    {
+                        button.BackgroundColor = Color.Blue;
+                        Xamarin.Forms.Label label_bleue = new Label();
+                        label_bleue.Text = selectedValue;
+                        listeDevis.Children.Add(label_bleue);
+                        labels.Add(label_bleue);
+                    }
+
+                    break;
+                case "Porte":
+                    if (button.BackgroundColor == Color.Brown)
+                    {
+                        //le boutton a été cliqué
+                        Label labelItem = chercherCategorie("Porte");
+                        labels.Remove(labelItem);
+                        listeDevis.Children.Remove(labelItem);
+                        button.BackgroundColor = Color.Default;
+                    }
+                    else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Brown)
+                    {
+
+                    }
+                    else
+
+                    {
+                        button.BackgroundColor = Color.Brown;
+                        Xamarin.Forms.Label label_maron = new Label();
+                        label_maron.Text = selectedValue;
+                        listeDevis.Children.Add(label_maron);
+                        labels.Add(label_maron);
+                    }
+                    break;
+                case "Fenêtre":
+                    if (button.BackgroundColor == Color.Black)
+                    {
+                        //le boutton a été cliqué
+                        Label labelItem = chercherCategorie("Fenêtre");
+                        labels.Remove(labelItem);
+                        listeDevis.Children.Remove(labelItem);
+                        button.BackgroundColor = Color.Default;
+                    }
+                    else if (button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Black)
+                    { 
+                    }
+                    else
+                    {
+                        button.BackgroundColor = Color.Black;
+                        Xamarin.Forms.Label label_green = new Label();
+                        label_green.Text = selectedValue;
+                        listeDevis.Children.Add(label_green);
+                        labels.Add(label_green);
+                    }
+                    break;
             }
-            if (selectedValue == "Mur")
-            {
-                button.BackgroundColor = Color.Blue;
-                Xamarin.Forms.Label label_maron = new Label();
-                label_maron.Text = selectedValue;
-                listeDevis.Children.Add(label_maron);
-
-            }
-            if (selectedValue == "Porte")
-            {
-                button.BackgroundColor = Color.Brown;
-                Xamarin.Forms.Label label_maron = new Label();
-                label_maron.Text = selectedValue;
-                listeDevis.Children.Add(label_maron);
-
-            }
-            if (selectedValue == "Fenêtre")
-            {
-                button.BackgroundColor = Color.Black;
-                Xamarin.Forms.Label label_green = new Label();
-                label_green.Text = selectedValue;
-                listeDevis.Children.Add(label_green);
-            }
-
-
         }
+
+        /*
+         * Cherche parmi la liste des label le premier ayant une valeur Text
+         * identique à celle passé en paramètre
+         * Param : categorie : le libellé de la catégorie du module (Porte, Fenêtre, Mur)
+         * Return : une référence sur un Label dont le champs texte correspond à la catégorie passé en paramètre
+         */
+        private Label chercherCategorie(string categorie) {
+            int index = 0;
+            if (labels == null) {
+                return null;
+            }
+
+            while (labels[index].Text != categorie)
+            {
+                index++;
+            }
+
+            return labels[index];
+        }
+
+
 
         public void view_devis_plan(object sender, EventArgs e)
         {
