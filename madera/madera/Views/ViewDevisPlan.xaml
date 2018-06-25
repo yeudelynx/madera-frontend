@@ -6,16 +6,37 @@
     <ContentPage Title="Prévisualisation">
         <ContentPage.Content>
             <Grid>
-                <!-- definition de ma grid 1 ligne 2 colones  -->
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
+                <Grid Grid.Column="0">
 
-                <!-- Scrolview  -->
-                <StackLayout x:Name="panneauSelection" Grid.Column="0"></StackLayout>
+                    <StackLayout x:Name="panneauSelection" Grid.Row="0" BackgroundColor="Cyan">
+                       
+                   </StackLayout>
+
+                    <StackLayout x:Name="panneauInfos" Grid.Row="1" BackgroundColor="Green">
+                        <Label Text="Informations sur le module choisi"></Label>
+
+                        <Label Text="Gamme choisie :"></Label>
+                        <Label x:Name="labelGammeChoisie" Text=""></Label>
+
+
+                        <Label Text="Catégorie choisie :"></Label>
+                        <Label x:Name="labelCategorieChoisie" Text=""></Label>
+
+                        <Label Text="Module choisi : "></Label>
+                        <Label x:Name="labelModuleChoisi" Text=""></Label>
+
+
+
+                    </StackLayout>
+
+                </Grid>
+
 
                 <StackLayout x:Name="layoutPlan" Grid.Column="1" BackgroundColor="AliceBlue">
                     <Grid x:Name="panneauPlan"></Grid>
@@ -32,6 +53,17 @@
         </ContentPage.Content>
     </ContentPage>
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Devis">
@@ -85,9 +117,10 @@
 
                         </Grid>
                     </Frame>
-
-                    <StackLayout x:Name="listeDevis" Grid.Row="1">
-                    </StackLayout>
+                    <ScrollView Grid.Row="1">
+                        <StackLayout x:Name="listeDevis" >
+                        </StackLayout>
+                    </ScrollView>
                 </Grid>
             </Grid>
         </ContentPage.Content>

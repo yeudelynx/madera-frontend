@@ -26,9 +26,21 @@ namespace madera.Views
 
 
         public string selectedValue;
+        public string selectedCategorie;
         public string selectedModule;
+        public string selectedGamme;
 
-        public List<Button> listeBoutton = new List<Button>();
+        public string infosGamme;
+        public string infosCategorie;
+        public string infosModule;
+
+
+        public string labelGamme;
+        public string labelCategorie;
+        public string labelModule;
+
+
+        string[] listeBoutton = new string[] {};
         public List<Label> listeLabel = new List<Label>();
 
 
@@ -54,51 +66,26 @@ namespace madera.Views
 
             //panneau de gauche
 
-
             //picker Gamme
             pickerGamme.Title ="Gamme";
             pickerGamme.ItemDisplayBinding = new Binding("lib_gamme");
             pickerGamme.ItemsSource = listeGamme;
+            pickerGamme.SelectedIndexChanged += new EventHandler(detailModule);
             panneauSelection.Children.Add(pickerGamme);
             
             //picker Categorie
             pickerCategorie.Title = "Catégorie";
             pickerCategorie.ItemDisplayBinding = new Binding("lib_categorie");
             pickerCategorie.ItemsSource = listeCategorie;
+            pickerCategorie.SelectedIndexChanged += new EventHandler(detailModule);
             panneauSelection.Children.Add(pickerCategorie);
 
             //picker Module
             pickerModule.Title = "Module";
             pickerModule.ItemDisplayBinding = new Binding("lib_module");
             pickerModule.ItemsSource = listeModule;
+            pickerModule.SelectedIndexChanged += new EventHandler(detailModule);
             panneauSelection.Children.Add(pickerModule);
-
-
-            // table sol...
-            //var listePointsSol = db.tableSol.ToList();
-
-            // {x1 : '9', x2 : '9', x3 : '9', x4 : '9'}
-
-            // panneau de droite
-            /* algo placement points : 
-
-        tracé mur du bas       
-        a = x;
-        while (plan.0.x <= plan.1.x) 
-            {
-                fait un bouton avec coordonnée (a, y)
-                a++
-            }
-
-        tracé mur de gauche 
-        a = y;
-        while (plan.0.x <= plan.3.x)
-            {
-                fait un bouton avec coordonnée (x, a)
-                a++
-            }
-
-            }*/
 
             List<Point> listePoints = new List<Point>();
 
@@ -126,49 +113,70 @@ namespace madera.Views
 
             var gridPanneauGauche = new Grid();
             layoutPlan.Children.Add(gridPanneauGauche);
-
+            int id = 0;
             // mur du bas 
             while (x0 < x1)
             {
                 Button element = new Button();
-                element.Clicked += new EventHandler(affectation);
                 panneauPlan.Children.Add(element, x0, 5);
+                //element.Text = x0.ToString();
+                //listeBoutton.Add(element);
+                element.Clicked += (object sender, EventArgs e) => {
+                    affectation(sender, e, id);
+                };
+
+                element.Text = id.ToString();
+
                 x0++;
-                listeBoutton.Add(element);
+                id++;
 
             }
 
             // mur de droite 
-            while (y1 < y2)
+            while (y1-1 < y2 -1 )
             {
                 Button element = new Button();
-                element.Clicked += new EventHandler(affectation);
                 panneauPlan.Children.Add(element, 4, y1);
+                element.Clicked += (object sender, EventArgs e) => {
+                    affectation(sender, e, id);
+                };
+
+                element.Text = id.ToString();
+                id++;
                 y1++;
-                listeBoutton.Add(element);
+                //listeBoutton.Add(element);
 
             }
 
             // mur du haut 
-            while (x3 < x2)
+            while (x3 < x2 -1)
             {
                 Button element = new Button();
-                element.Clicked += new EventHandler(affectation);
+                element.Clicked += (object sender, EventArgs e) => {
+                    affectation(sender, e, id);
+                };
+                element.Text = id.ToString();
+                id++;
                 panneauPlan.Children.Add(element, x3, 0);
                 x3++;
-                listeBoutton.Add(element);
-
             }
 
             // mur de gauche 
-            while (y0 < y3)
+            while (y0 < y3 )
             {
                 Button element = new Button();
-                element.Clicked += new EventHandler(affectation);
-                Console.WriteLine(selectedModule);
-                panneauPlan.Children.Add(element, 0, y0);
+                element.Clicked += (object sender, EventArgs e) => {
+                    affectation(sender, e, id);
+                };
+                element.Text = id.ToString();
+                id++;
+                if (y0 != 0)
+                {
+                    panneauPlan.Children.Add(element, 0, y0);
+                }             
                 y0++;
-                listeBoutton.Add(element);
+                id++;
+                //listeBoutton.Add(element);
 
             }
 
@@ -176,12 +184,17 @@ namespace madera.Views
         }
 
         // Manipulation du plan
-        void affectation(object sender, EventArgs e)
+        void affectation(object sender, EventArgs e, int id)
+            //onclick sur le bouton
         {
             var button = (Button)sender;
+            button.Id
 
             selectedValue = "";
+            selectedGamme = "";
+            selectedCategorie = "";
             selectedModule = "";
+
 
 
             // servira à recupérer les coordonnées dans l'espace => x y z
@@ -224,42 +237,123 @@ namespace madera.Views
             button.Text = selectedModule;
 
             /*
-             Pour chaque bouton présent : 
+                à faire : 
+                1) afficher les information des items selectionnés en bas des trois pickers uniquement si les 3 pickers sont selectionnés
+                2) Debugger l'affichage de la génération des devis
+                3) regarder sur la DB comment sont envoyés les points pour faire des plans en fonction des maison
+
+
              
              */
 
-            foreach (Button boutton in listeBoutton)
+            foreach (var boutton in listeBoutton)
             {
-                if (boutton.GetType() == typeof(Button))
+                string nomBouton = "";
+                nomBouton = boutton.Text;
+                if (string.IsNullOrEmpty(nomBouton))
                 {
 
-                    if (boutton.Text != "")
-                    {
-                        
-                        Xamarin.Forms.Label labelDevis = new Label();
-                        labelDevis.Text = boutton.Text;
-                        listeLabel.Add(labelDevis);
-                    }
-
-
+                }
+                else
+                {
+                    Xamarin.Forms.Label labelDevis = new Label();
+                    labelDevis.Text = boutton.Text;
+                    listeLabel.Add(labelDevis);
                 }
             }
+            
+
+            /*foreach (Button boutton in listeBoutton)
+            {
+                string nomBouton = "";
+                nomBouton = boutton.Text;
+                if (string.IsNullOrEmpty(nomBouton))
+                {
+
+                } else
+                {
+                    Xamarin.Forms.Label labelDevis = new Label();
+                    labelDevis.Text = boutton.Text;
+                    listeLabel.Add(labelDevis);
+                }
+
+            }*/
         }
 
         // maj ihm devis
         void actualisation(object sender, EventArgs e)
         {
+            //listeDevis.Child.RemoveAll();
+            //listeDevis.Children.RemoveAt();
+
+            //< StackLayout x: Name = "listeDevis" >
+
+            listeDevis.Children.Clear();
+
+            Console.WriteLine(listeLabel);
 
             foreach (var label in listeLabel)
             {
-                if(label.Text != "") {
-                    Xamarin.Forms.Label toto = new Label();
-                    toto.Text = "label choisi : ";
-                    listeDevis.Children.Add(toto);
-                    listeDevis.Children.Add(label);
+                string text = label.Text;
+                if (string.IsNullOrEmpty(text))
+                {
+                } else { 
+                    Xamarin.Forms.Label labelDevis = new Label();
+                    labelDevis.Text = "label choisi : " + label.Text;
+                    listeDevis.Children.Add(labelDevis);
                 }
             }
         }
+
+        // afiche les details d'un module lorsque les trois pickers sont selectionnés
+        void detailModule(object sender, EventArgs e)
+        {
+            try
+            {
+                selectedCategorie = pickerCategorie.Items[pickerCategorie.SelectedIndex];
+                selectedModule = pickerModule.Items[pickerModule.SelectedIndex];
+                selectedGamme = pickerGamme.Items[pickerGamme.SelectedIndex];
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+
+            if (selectedGamme != null)
+            {
+                labelGammeChoisie.Text = selectedGamme;
+            }
+
+
+            if (selectedCategorie != null)
+            {
+                labelCategorieChoisie.Text = selectedCategorie;
+            }
+            // !!! attention, ecrire les points dans l'ordre indiqué de la création des murs
+
+            if (selectedModule != null)
+            {
+                // selected module . text = ce que j'affiche / selected module = la value de mon picker
+                labelModuleChoisi.Text = selectedModule;
+
+
+                LocalDatabase db = new LocalDatabase();
+                var listeModule = db.tableModule.ToList();
+
+                /*var query = from m in db.tableModule
+                            where m.lib_module = selectedModule
+                            select m;*/
+
+
+                // string detailsModule = listeModule.Where(n = selectedModule);
+
+            }
+
+        }
+
+
         
 
         public void view_devis_plan(object sender, EventArgs e)
