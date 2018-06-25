@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using madera.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,7 +17,22 @@ namespace madera.Views
 
         /*La liste des objets labels ajoutés pour pouvoir rechercher la catégorie des modules par le libellé présent dans le champ text.*/
         private List<Label> labels;
+        private LocalDatabase database;
         private Dictionary<Color, string> categories;
+        //Permet de récupérer le libellé de la catégorie référencé par le module(libellé de la catégorie dont la clé primaire est clé étrangère dans Module)
+        private Dictionary<Module, string> listCategorie;
+
+        //Tous les modules ajoutés dans le devis.
+        private List<Module> modulesAjoutes;
+        private List<Gamme> listeGamme;
+
+        //les modules disponnibles
+        private List<Module> listeModule;
+        private List<Categorie> listeCategorie;
+        private List<Constituer> listeConstituer;
+
+
+
         public int idclient;
         public int iddevis;
         public int idplan;
@@ -44,11 +60,14 @@ namespace madera.Views
             categories[Color.Blue] = "Mur";
             categories[Color.Brown] = "Porte";
             categories[Color.Black] = "Fenêtre";
-            LocalDatabase db = new LocalDatabase();
+            modulesAjoutes = new List<Module>();
+            database = new LocalDatabase();
             labels = new List<Label>();
-            var listeGamme = db.tableGamme.ToList();
-            var listeCategorie = db.tableCategorie.ToList();
-            var listeModule = db.tableModule.ToList();
+            listeGamme = database.tableGamme.ToList();
+            listeCategorie = database.tableCategorie.ToList();
+            listeModule = database.tableModule.ToList();
+            listCategorie = new Dictionary<Module, string>();
+;            fillDictionary(ref listCategorie);
 
             //panneau de gauche
             //picker Gamme
@@ -149,11 +168,14 @@ namespace madera.Views
                 y0++;
             }
 
+        }
 
-            
-
-
-
+        private void fillDictionary(ref Dictionary<Module, string> categories) {
+            foreach(var moduleItem in listeModule) {
+                int categorie_id = moduleItem.categorie_id;
+                Categorie cat = (listeCategorie.Where(item => item.id == categorie_id).ToList().Count > 0 ? listeCategorie.Where(item => item.id == categorie_id).ToList()[0] : null) ;
+                categories[moduleItem] = (cat == null ? "-" : cat.lib_categorie);
+            }
 
         }
 
@@ -164,19 +186,25 @@ namespace madera.Views
          */
         void affectation(object sender, EventArgs e)
         {
+            int indexModuleChoisi = -1;
             var button = (Button)sender;
             string selectedValue ="";
             
             // servira à recupérer les coordonnées dans l'espace => x y z
             try
             {
-                selectedValue = pickerCategorie.Items[pickerCategorie.SelectedIndex];
+                indexModuleChoisi = pickerModule.SelectedIndex;
+                int identifiant_categorie = listeModule[indexModuleChoisi].categorie_id;
+                Categorie catModule = listeCategorie.Where(item => item.id == identifiant_categorie).ToList()[0];
+                selectedValue = catModule.lib_categorie;
+             
             }
             catch (Exception)
             {
                 //DisplayAlert("Erreur", "Veuillez selectionner une gamme", "Ok");
             }
             // TODO : remplacer par un switch
+            StringBuilder builder;
             switch (selectedValue)
             {
                 case "Aucune":
@@ -187,24 +215,32 @@ namespace madera.Views
                     break;
                 case "Mur":
 
+                    
                     if (button.BackgroundColor == Color.Blue)
                     {
                         //le boutton a été cliqué
                         Label labelItem = chercherCategorie("Mur");
+                        //récupérer dans la base de données l'identifiant de catégorie
+                        //element.categorie_id = listeCategorie.Find(categorie => categorie.lib_categorie == labelItem.Text).id;
+
                         labels.Remove(labelItem);
                         listeDevis.Children.Remove(labelItem);
                         button.BackgroundColor = Color.Default;
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                     }
                     else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Blue)
                     {
 
-                        this.remplacerModule(ref button, "Mur");
+                        this.remplacerModule(ref button, listeModule[indexModuleChoisi], Color.Blue);
                     }
                     else
                     {
                         button.BackgroundColor = Color.Blue;
                         Xamarin.Forms.Label label_bleue = new Label();
-                        label_bleue.Text = selectedValue;
+                        
+                        builder = new StringBuilder();
+                        builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
+                        label_bleue.Text = builder.ToString();
                         listeDevis.Children.Add(label_bleue);
                         labels.Add(label_bleue);
                     }
@@ -218,17 +254,21 @@ namespace madera.Views
                         labels.Remove(labelItem);
                         listeDevis.Children.Remove(labelItem);
                         button.BackgroundColor = Color.Default;
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                     }
                     else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Brown)
                     {
-                        this.remplacerModule(ref button, "Porte");
+                        this.remplacerModule(ref button, listeModule[indexModuleChoisi], Color.Brown);
                     }
                     else
 
                     {
                         button.BackgroundColor = Color.Brown;
                         Xamarin.Forms.Label label_maron = new Label();
-                        label_maron.Text = selectedValue;
+                        builder = new StringBuilder();
+                        builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
+                        label_maron.Text = builder.ToString();
+                        
                         listeDevis.Children.Add(label_maron);
                         labels.Add(label_maron);
                     }
@@ -240,17 +280,20 @@ namespace madera.Views
                         Label labelItem = chercherCategorie("Fenêtre");
                         labels.Remove(labelItem);
                         listeDevis.Children.Remove(labelItem);
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                         button.BackgroundColor = Color.Default;
                     }
                     else if (button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Black)
                     {
-                        this.remplacerModule(ref button, "Fenêtre");
+                        this.remplacerModule(ref button, listeModule[indexModuleChoisi], Color.Black);
                     }
                     else
                     {
                         button.BackgroundColor = Color.Black;
                         Xamarin.Forms.Label label_green = new Label();
-                        label_green.Text = selectedValue;
+                        builder = new StringBuilder();
+                        builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
+                        label_green.Text = builder.ToString();
                         listeDevis.Children.Add(label_green);
                         labels.Add(label_green);
                     }
@@ -263,9 +306,10 @@ namespace madera.Views
          * Param : button : le module à remplacer
          * nvelleCategorie : la nouvelle categorie du nouveau module.
          */
-        private void remplacerModule(ref Button button, string nvlleCategorie)
+        private void remplacerModule(ref Button button, Module nveauModule, Color nvelleCouleur)
         {
             //Chercher la catégorie du module placer.
+            Color ancienneCouleur = button.BackgroundColor;
             Label labelItem = chercherCategorie(categories[button.BackgroundColor]);
 
             //supprimer la catégorie de la liste des labels
@@ -276,11 +320,15 @@ namespace madera.Views
             labelItem = new Label();
 
             //remplacer l'ancienne catégorie par la nouvel.
-            labelItem.Text = nvlleCategorie;
-            button.BackgroundColor = Color.Blue;
+            StringBuilder builder = new StringBuilder();
+            builder.Append(listCategorie[nveauModule]).Append(" ").Append(nveauModule.prix).Append(" ").Append("euros.");
+            labelItem.Text = builder.ToString();
+            button.BackgroundColor = nvelleCouleur;
+            modulesAjoutes.Add(nveauModule);
             listeDevis.Children.Add(labelItem);
 
         }
+
 
         /*
          * Cherche parmi la liste des label le premier ayant une valeur Text
@@ -293,8 +341,9 @@ namespace madera.Views
             if (labels == null) {
                 return null;
             }
-
-            while (labels[index].Text != categorie)
+            char[] separator = new char[1];
+            separator[0] = ' ';
+            while (labels[index].Text.Split(separator)[0] != categorie && index < labels.Count)
             {
                 index++;
             }
