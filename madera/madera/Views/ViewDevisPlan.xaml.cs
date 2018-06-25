@@ -13,8 +13,10 @@ namespace madera.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewDevisPlan : TabbedPage
     {
+
         /*La liste des objets labels ajoutés pour pouvoir rechercher la catégorie des modules par le libellé présent dans le champ text.*/
         private List<Label> labels;
+        private Dictionary<Color, string> categories;
         public int idclient;
         public int iddevis;
         public int idplan;
@@ -38,7 +40,10 @@ namespace madera.Views
         public ViewDevisPlan()
         {
             InitializeComponent();
-            
+            categories = new Dictionary<Color, string>();
+            categories[Color.Blue] = "Mur";
+            categories[Color.Brown] = "Porte";
+            categories[Color.Black] = "Fenêtre";
             LocalDatabase db = new LocalDatabase();
             labels = new List<Label>();
             var listeGamme = db.tableGamme.ToList();
@@ -192,7 +197,8 @@ namespace madera.Views
                     }
                     else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Blue)
                     {
-                        //Un autre module a déjà été placé. Ne rien faire.
+
+                        this.remplacerModule(ref button, "Mur");
                     }
                     else
                     {
@@ -215,7 +221,7 @@ namespace madera.Views
                     }
                     else if(button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Brown)
                     {
-
+                        this.remplacerModule(ref button, "Porte");
                     }
                     else
 
@@ -237,7 +243,8 @@ namespace madera.Views
                         button.BackgroundColor = Color.Default;
                     }
                     else if (button.BackgroundColor != Color.Default && button.BackgroundColor != Color.Black)
-                    { 
+                    {
+                        this.remplacerModule(ref button, "Fenêtre");
                     }
                     else
                     {
@@ -249,6 +256,25 @@ namespace madera.Views
                     }
                     break;
             }
+        }
+
+        private void remplacerModule(ref Button button, string nvlleCategorie)
+        {
+            //Chercher la catégorie du module placer.
+            Label labelItem = chercherCategorie(categories[button.BackgroundColor]);
+
+            //supprimer la catégorie de la liste des labels
+            labels.Remove(labelItem);
+            listeDevis.Children.Remove(labelItem);
+
+            //créer un nouveau label
+            labelItem = new Label();
+
+            //remplacer l'ancienne catégorie par la nouvel.
+            labelItem.Text = "Mur";
+            button.BackgroundColor = Color.Blue;
+            listeDevis.Children.Add(labelItem);
+
         }
 
         /*
