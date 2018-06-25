@@ -30,7 +30,7 @@ namespace madera.Views
 
             foreach (var devis in db.tableDevis)
             {
-                if (devis.user_id == iduser)
+                if (devis.user_id == iduser && devis.client_id == idclient)
                 {
                     Xamarin.Forms.Button MyControl1 = new Xamarin.Forms.Button();
                     MyControl1.Text = "Devis" + " " + devis.id;
