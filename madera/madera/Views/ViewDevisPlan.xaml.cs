@@ -258,6 +258,11 @@ namespace madera.Views
             }
         }
 
+        /**
+         * Remplace un module symbolisé par un boutton par un autre module.
+         * Param : button : le module à remplacer
+         * nvelleCategorie : la nouvelle categorie du nouveau module.
+         */
         private void remplacerModule(ref Button button, string nvlleCategorie)
         {
             //Chercher la catégorie du module placer.
