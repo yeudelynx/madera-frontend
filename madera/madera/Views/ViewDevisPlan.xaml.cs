@@ -276,7 +276,7 @@ namespace madera.Views
             labelItem = new Label();
 
             //remplacer l'ancienne catégorie par la nouvel.
-            labelItem.Text = "Mur";
+            labelItem.Text = nvlleCategorie;
             button.BackgroundColor = Color.Blue;
             listeDevis.Children.Add(labelItem);
 
