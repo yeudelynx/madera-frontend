@@ -77,7 +77,7 @@
 
                     <Frame Grid.Row="0">
                         <Grid>
-                            <Button x:Name="sauvegarde" Text="Sauvegarder"   Grid.Column="0" />
+                            <Button x:Name="sauvegarde" Text="Sauvegarder"   Grid.Column="0" Clicked="sauvegarder" />
                             <Button x:Name="synchroniser" Text="Synchroniser" Grid.Column="1" />
                             <Label Text="Devis gnah gnah"  Grid.Column="2" />
                             <Button x:Name="email" Text="Email" Grid.Column="3" />

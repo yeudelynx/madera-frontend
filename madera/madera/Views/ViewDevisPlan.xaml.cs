@@ -1,11 +1,12 @@
 ﻿using madera.Helpers;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using madera.Models;
-
+using Android.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -235,6 +236,7 @@ namespace madera.Views
                     }
                     else
                     {
+                        //c'est la couleur par défaut. Aucun module à cette emplacement.
                         button.BackgroundColor = Color.Blue;
                         Xamarin.Forms.Label label_bleue = new Label();
                         
@@ -242,6 +244,7 @@ namespace madera.Views
                         builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
                         label_bleue.Text = builder.ToString();
                         listeDevis.Children.Add(label_bleue);
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                         labels.Add(label_bleue);
                     }
 
@@ -268,7 +271,7 @@ namespace madera.Views
                         builder = new StringBuilder();
                         builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
                         label_maron.Text = builder.ToString();
-                        
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                         listeDevis.Children.Add(label_maron);
                         labels.Add(label_maron);
                     }
@@ -295,6 +298,7 @@ namespace madera.Views
                         builder.Append(selectedValue).Append(" ").Append(listeModule[indexModuleChoisi].prix).Append(" ").Append("euros");
                         label_green.Text = builder.ToString();
                         listeDevis.Children.Add(label_green);
+                        modulesAjoutes.Add(listeModule[indexModuleChoisi]);
                         labels.Add(label_green);
                     }
                     break;
@@ -351,6 +355,27 @@ namespace madera.Views
             return labels[index];
         }
 
+        /*
+         * Ecouteur permettant la sauvegarde des modules associés dans la base de données. 
+         */
+        public void sauvegarder(object sender, EventArgs e)
+        {
+
+            const int ETAGE_DEFAUT = 0;
+            //sauvegarder la liste des modules.
+            Constituer constitutionDevis = null;
+            Date date = new Date();
+            foreach (var module in modulesAjoutes) {
+                constitutionDevis = new Constituer();
+                constitutionDevis.prix_module = module.prix;
+                constitutionDevis.module_id = module.id;
+                constitutionDevis.etage_plan = ETAGE_DEFAUT;
+                constitutionDevis.created_at = DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture);
+                constitutionDevis.updated_at = DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture);
+                constitutionDevis.devis_id = this.iddevis;
+                database.db.Insert(constitutionDevis);
+            }
+        }
 
 
         public void view_devis_plan(object sender, EventArgs e)
@@ -360,11 +385,6 @@ namespace madera.Views
             NavigationPage.SetHasNavigationBar(MainPages, false);
 
         }
-
-
-
-
-
 
     }
 
